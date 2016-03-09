@@ -11,12 +11,8 @@ class GradeController extends BaseController {
 	public function __construct(){
 		parent::__construct();
 	} 
-	 
 	//个人等级
 	public function index(){
 		$this->display();
 	}
-		
-    
-
 }
