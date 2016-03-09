@@ -1,13 +1,11 @@
 <?php
-// +----------------------------------------------------------------------
-// | 哇途网个人等级模块
-// +----------------------------------------------------------------------
-// | Copyright (c) http://www.muxiangdao.cn
-// +----------------------------------------------------------------------
-// | 功能区块:首页数据
-// +----------------------------------------------------------------------
-// | Author: 开发团队
-// +----------------------------------------------------------------------
+/**
+ * 会员等级模块
+ * @copyright  Copyright (c) 2014-2016 muxiangdao-cn Inc.(http://www.muxiangdao.cn)
+ * @license    http://www.muxiangdao.cn
+ * @link       http://www.muxiangdao.cn
+ * @author     muxiangdao-cn Team Prayer (283386295@qq.com)
+ */
 namespace Member\Controller;
 class GradeController extends BaseController {
 	public function __construct(){
