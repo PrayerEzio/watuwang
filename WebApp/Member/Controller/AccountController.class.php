@@ -4,7 +4,7 @@
  * @copyright  Copyright (c) 2014-2016 muxiangdao-cn Inc.(http://www.muxiangdao.cn)
  * @license    http://www.muxiangdao.cn
  * @link       http://www.muxiangdao.cn
- * @author     muxiangdao-cn Team Prayer (283386295@qq.com)
+ * @author     muxiangdao-cn Team Prayer (283386295@qq.com) Caidahui (1156949976@qq.com)
  */
 namespace Member\Controller;
 use Think\Page;
