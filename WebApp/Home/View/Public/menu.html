@@ -1,0 +1,29 @@
+	<div class="seek-box">
+		<div class="wrap">
+			<a class="fl" href="index.html" ><img style="vertical-align: top;" src="__IMG__/logo1.png" alt=""></a> 
+			
+			<div class="seek-bord fr">
+			  <span class="seek"><input type="text" placeholder="关键词/编号/类别"></span>
+			   <span class="seek-but"><input type="submit" value=" "></span>
+			</div>
+
+
+			<div class="head-nav fr">
+				<ul>
+				 	<li <if condition="CONTROLLER_NAME EQ Index && ACTION_NAME EQ index">class="on"</if>><a href="{:U('Home/Index/index')}">首页</a></li>
+				 	<li <if condition="CONTROLLER_NAME EQ Goods && ACTION_NAME EQ images">class="on"</if>><a href="{:U('Home/Goods/images')}">找图</a></li>
+				 	<li <if condition="CONTROLLER_NAME EQ Goods && ACTION_NAME EQ font">class="on"</if>><a href="{:U('Home/Goods/font')}">找字体</a></li>
+				 	<li <if condition="CONTROLLER_NAME EQ Goods && ACTION_NAME EQ drawing">class="on"</if>><a href="{:U('Home/Goods/drawing')}">画图</a></li>
+				 	<li <if condition="CONTROLLER_NAME EQ Goods && ACTION_NAME EQ rebate">class="on"</if>><a href="{:U('Home/Goods/rebate')}">折扣下载</a></li>
+				 	<li <if condition="CONTROLLER_NAME EQ Goods && ACTION_NAME EQ concept">class="on"</if>><a href="{:U('Home/Goods/concept')}">购图</a></li>
+				 </ul>
+				 <!-- 清除浮动 -->
+				<div class="clearfloat"></div>
+			 </div>
+			<!-- <div class="thirdparty fr">
+				<a class="one" href=""><i class="b-ico-qq"></i>QQ登录</a>&nbsp;&nbsp;&nbsp;<a class="two" href=""><i class="b-ico-wx"></i>微信登录</a>
+			</div> -->
+			<!-- 清除浮动 -->
+				<div class="clearfloat"></div>
+		</div>
+	</div>

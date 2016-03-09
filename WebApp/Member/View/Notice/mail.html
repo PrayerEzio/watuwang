@@ -1,0 +1,147 @@
+<include file="Public/header" />
+<include file="Public/nav" />
+<div class="admin-main-box">
+	<div class="wrap overhide mrg-bot">
+		<include file="Public/menu" />
+
+		<div class="manage-list-con fl">
+		   	<div class="money-record">
+		   	  <div class="admin-man-top-nav"><a href="{:U('Notice/mail')}">收件箱</a></div>
+		   	  <div class="admin-man-top-nav"><a href="{:U('Notice/mail',array('type'=>1))}">发件箱</a></div>
+		   	  <div class="admin-man-top-nav fr"><a class="send-but" onclick="fasong()" href="javascript:"><i class="b-ico-send"></i>发信息</a></div>
+		   	  <!-- 清除浮动 -->
+		         <div class="clearfloat"></div>
+		   	</div>
+
+		   	<div class="message-main">
+		   		<div class="logon-rz">
+		   	       <div class="rz-item"><span class="man-w47">&nbsp;</span><span class="man-w5">编号</span><span class="man-w5">发送者</span><span class="man-w9">标题</span><span class="man-w5">时间</span><span class="man-w5">操作状态</span></div>
+					<volist name="list" id="vo">
+		   	       <div class="rz-item"><span class="man-w47"><input id="check-0" type="checkbox" name="del_id" value="{$vo['id']}"></span><span class="man-w5">{$vo['number']}</span><span class="man-w5">{$vo['out_id']|user_nickname}</span><span class="man-w9"><a onclick="sitesmessage()" href="javascript:">{$vo['title']}</a></span><span class="man-w5">{$vo['time']||date="Y-m-d H:i:s",###}</span><span class="man-w5"><if condition="$vo['status'] eq 1">已回复<else /><if condition="$vo['out_id'] eq $user['member_id']">未回复<else /><a onclick="xiangxi('{$vo['content']}','{$vo['out_id']|user_nickname}',{$vo['id']})" href="javascript:">未回复</a></if></if></span></div>
+					</volist>
+		        </div>
+		        <p style="text-align:right; padding-top:15px;">
+		        	<a class="spec-but" style="margin-right: 15px;" onclick="selectall()" href="javascript:">全选</a>
+		        	<a class="spec-but bhqb spec-cancle" onclick="issuepaly()" href="javascript:">删除</a>
+		        </p>
+		   	</div>
+		   	
+		   	<script>
+		   		/* 详细 */
+				function xiangxi(con,name='',id){
+		   			$("#wen").empty();
+		   			$("#wen").text(con);
+		   			$("#zj-name").val(name);
+		   			if(id != ''){
+		   				$("#status").val(id)
+		   			}
+			    	$('.modal-dialog-bg').show();
+			    	$('.sitesmessage').show();
+		   		}
+		   		
+		   		/* 发送 */
+		   		function fasong(){
+		   	    	$('.sitesmessage').hide();
+		   	    	$("#zj-name").val('');
+		   	    	$("#title").val('');
+		   	    	$("#status").val('')
+		   	    	$("#content").val('');
+		   	    	$('.modal-dialog-bg').show();
+		   	    	$('.Message-paly').show();
+		   		}
+		   	</script>
+
+		   	<!-- 翻页 -->
+		    <div class="pro_page">  
+					<div>{$show}
+					</div>		
+				</div>
+
+				<!-- 广告部分 -->
+				<div style="height:80px;"></div>
+				<div class="footbanner"><img src="__IMG__/banner.jpg" alt=""></div>
+		</div>
+
+		 <!-- 清除浮动 -->
+		<div class="clearfloat"></div>
+	</div>
+</div>
+<!-- 弹窗部分 -->
+<div class="modal-dialog-bg" style="display: none;"></div>
+<!-- 站内信发送 -->
+<div class="modal-wrapper Message-paly" style="display:none">
+		<form id="zhan" action="" method="post">
+		<div class="ball-box"> 
+		  <h3>站内信发送</h3>
+	  	  <div class="ball-main-con">
+	  	  	<input type="hidden" id="status" name="status" value="" />
+	  	  	<p><span class="lis"><em class="red">*</em>发送给：</span><input class="zj-name" id="zj-name" name="nickname" type="text" placeholder="输入用户名"></p><br>
+
+	  	  	<p><span class="lis"><em class="red">*</em>发送标题：</span><input class="zj-name" id="title" name="title" type="text" placeholder="输入短信标题"></p>
+
+	  	  	<div class="textarea-d"><span class="lis">发送内容：</span><textarea id="content" name="content"></textarea>
+	  	  		<p style="margin-top:8px;"><span class="lis"></span>6到300字符之间  <input type="file" style="display:none" id="file"> 
+	  	  		<label class="adjunct" for="file">附件上传</label> </p> 
+	  	  	</div>
+	  	    <div><span class="lis"></span><a id='sub' class="inline-b esc" href="javascript:">发送</a> <a class="inline-b clos" href="">取消</a></div>
+	  	  </div>
+		  <i class="b-ico-close"></i>
+		</div>
+		</form>
+</div>
+
+<script>
+	$("#sub").click(function(){
+		$("#zhan").submit();
+	});
+
+	
+	
+	
+</script>
+
+<input name="pop" value="1" />
+<input name="pop" value="2" />
+
+<!-- 删除弹窗 -->
+
+	<div class="modal-wrapper issuepaly" style="display:none;">
+		<div class="hint-box"> 
+		  <p class="hint-ts-styls"><i class="b-ico-issue"></i>确定删除所选内容</p>	 
+		  <p class="hint-ts-styls"><a style="margin-right:100px;" id="del_que" class="bo-cf" href="javascript:">确定</a> <a class="bcf-cb" href="">取消</a></p>		  
+		  <i  class="b-ico-close"></i>
+		</div>
+	</div>
+<script>
+$("#del_que").click(function(){
+	var str = "";
+	$("input[name=del_id]").each(function(){
+		if($(this).is(":checked")){
+			str+=","+$(this).val();
+		}
+	});
+		var URL = "{:U('Member/Notice/mail_del')}";
+		var data = {'id':str}
+		$.post(URL,data,function(res){
+			switch(res){
+				case '-1':
+					alert('删除失败');
+					break;
+				case '1':
+					location.reload();
+					break;
+			}
+		});
+	})  
+</script>
+
+<!-- 站内信详情 弹窗 -->
+	<div class="modal-wrapper sitesmessage" style="display:none;">
+		<div class="hint-box"> 
+		  <p id="wen">(编辑器内容)亲爱的我要打灰机，您的作品经管理员下载验证存在出错的情况。暂将您的作品作“禁止他人下载”处理，请您自收到此站内短信之时起算，7日内及时下载并自行删除图片。逾期未处理，昵图网程序将自动删除文件，届时您将无法自行下载查看文件情况</p>	 
+		  <p class="hint-ts-styls"><a class="bo-cf" onclick="Messagepaly()" href="javascript:">回复</a></p>		  
+		  <i  class="b-ico-close"></i>
+		</div>
+	</div>
+
+<include file="Public/footer" />

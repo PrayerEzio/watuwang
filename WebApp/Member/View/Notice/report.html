@@ -1,0 +1,117 @@
+<include file="Public/header" />
+<include file="Public/nav" />
+
+<div class="admin-main-box">
+	<div class="wrap overhide mrg-bot">
+		<include file="Public/menu" />
+
+		<div class="manage-list-con fl">
+		   	<div class="money-record">
+		   	  <div class="admin-man-top-nav on"><a href="#">全部</a></div>
+		   	  <div class="admin-man-top-nav"><a href="#">举报</a></div>
+		   	  <div class="admin-man-top-nav"><a href="#">被举报</a></div>
+		   	  <div class="admin-man-top-nav"><a href="#">申述</a></div>
+		   	  <div class="admin-man-top-nav bb-cf fr"><a style="color:#fff;" href="{:U('Notice/report_add')}">发起申述</a></div>
+		   	  <!-- 清除浮动 -->
+		         <div class="clearfloat"></div>
+		   	</div>
+
+		   	<div class="report-record-main">
+		   		<div class="manage-head">
+    				<span class="man-w3">类型</span><span class="man-w2">标题</span><span class="man-w10">时间</span><span class="man-w3">状态</span><span class="man-w3">操作</span>
+    			</div>
+    			<div class="manage-item">
+    				<div class="man-w3 mana-b fl"><em>被举报</em></div>
+    				<div class="man-w2 mana-b fl">
+    					<p>内容内容内容内容内容内容内容内容内容</p>
+    				</div>
+    				<div class="man-w10 mana-b fl">
+    				<p>2015.02.21</p>
+    				</div>
+    				<div class="man-w3 mana-b fl">
+    				  <p class="red">已处理</p>
+    				</div>
+    				<div class="man-w3 mana-b fl">
+    				  <p><a class="blcf-but" href="{:U('Notice/report_check')}">查看</a></p>
+    				</div>
+    				<!-- 清除浮动 -->
+				      <div class="clearfloat"></div>
+    			</div>
+
+    			<div class="manage-item">
+    				<div class="man-w3 mana-b fl"><em>举报</em></div>
+    				<div class="man-w2 mana-b fl">
+    					<p>内容内容内容内容内容内容内容内容内容</p>
+    				</div>
+    				<div class="man-w10 mana-b fl">
+    				<p>2015.02.21</p>
+    				</div>
+    				<div class="man-w3 mana-b fl">
+    				  <p class="red">已处理</p>
+    				</div>
+    				<div class="man-w3 mana-b fl">
+    				  <p><a class="blcf-but" href="{:U('Notice/report_check')}">查看</a></p>
+    				</div>
+    				<!-- 清除浮动 -->
+				      <div class="clearfloat"></div>
+    			</div>
+
+    			<div class="manage-item">
+    				<div class="man-w3 mana-b fl"><em>申述</em></div>
+    				<div class="man-w2 mana-b fl">
+    					<p>内容内容内容内容内容内容内容内容内容</p>
+    				</div>
+    				<div class="man-w10 mana-b fl">
+    				<p>2015.02.21</p>
+    				</div>
+    				<div class="man-w3 mana-b fl">
+    				  <p class="red">已处理</p>
+    				</div>
+    				<div class="man-w3 mana-b fl">
+    				  <p><a class="blcf-but" href="{:U('Notice/report_check')}">查看</a></p>
+    				</div>
+    				<!-- 清除浮动 -->
+				      <div class="clearfloat"></div>
+    			</div>
+
+		   	</div>
+		   	<!-- 翻页 -->
+		    <div class="pro_page">  
+					<div><a class="num" href="">首页</a><span class="current">1</span><a class="num" href="">2</a><a class="num" href="">3</a><a class="num" href="">末页</a><a class="next" href="">下一页</a> 
+					</div>		
+				</div>
+
+				<!-- 广告部分 -->
+				<div style="height:80px;"></div>
+				<div class="footbanner"><img src="img/banner.jpg" alt=""></div>
+		</div>
+		 <!-- 清除浮动 -->
+		<div class="clearfloat"></div>
+	</div>
+</div>
+<!--foot nav  end-->
+<!-- 弹窗部分 -->
+<div class="modal-dialog-bg" style="display: none;"></div>
+
+<!-- 充值 弹窗-->
+<div class="modal-wrapper modal-wrapper-big rechargeplay" style="display:none;">
+		<div class="recharge-paly"> 
+	  	  <div class="recharge-select">
+	  	  	<span>充值：</span>
+	  	  	<input id="c1" name="rech" type="radio"><label for="c1">50</label>
+	  	  	<input id="c2" name="rech" type="radio"><label for="c2">100</label>
+	  	  	<input id="c3" name="rech" type="radio"><label for="c3">150</label>
+	  	  	<input id="c4" name="rech" type="radio"><label for="c4">200</label>
+	  	  	<span>其他</span>&nbsp;&nbsp;
+	  	  	 <input class="rech-text" type="text" placeholder="(请输入充值金额)">
+	  	  </div>
+	  	  <div class="zhifu-select">
+	  	  	<span>支付方式：</span>
+	  	  	<input id="zf1" name="zhifu" checked type="radio"><label for="zf1"><img src="img/zhifubao.png" alt=""></label>
+	  	  </div>
+	  	   <p style="text-align:center;"><a href="" class="sumb-but">立刻充值</a></p>
+	  	   <p style="margin-top:50px; font-size:12px; color:#9a9a9a;">温馨提示：充值无使用时间限制，用完为止。</p>
+		  <i class="b-ico-close"></i>
+		</div>
+</div>
+<include file="Public/footer" />

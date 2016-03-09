@@ -1,0 +1,52 @@
+<include file="Public/header" />
+<include file="Public/nav" />
+<div class="admin-main-box">
+	<div class="wrap overhide mrg-bot">
+		<include file="Public/menu" />
+		<div class="admin-list-con fl">
+			<div class="admin-index-con-detail">
+				<div class="zhbd-main-box">
+					<h3 class="common-title">账号绑定</h3>
+					<div class="zhbd-main-item">
+							<if condition="empty($user['member_qq'])">
+								<i class="c-ico-bQQ"></i>绑定QQ账号<em class="red">未绑定</em>
+							<else />
+								<i class="c-ico-bQQ"></i>绑定QQ账号<em class="red">已绑定</em>({$user['member_qq']})
+							</if> 
+							<if condition="empty($user['member_qq'])">
+								<a class="fr blues" href="">立即绑定</a>
+							<else />
+								<a class="fr blues" href="">解绑</a>
+							</if> 							
+					</div>
+					
+					<div class="zhbd-main-item">
+						<i class="c-ico-bWX"></i>绑定微信账号<em class="red"> 未绑定</em> (此处填写微信号)
+						<a class="fr blues" onclick="relieveplay()" href="javascript:">解绑</a>
+					</div>
+					
+					<div class="zhbd-main-item">
+							<if condition="empty($user['mobile'])">
+								<i class="c-ico-bPhone"></i>绑定手机号<em class="red"> 未绑定</em> 
+							<else />
+								<i class="c-ico-bPhone"></i>绑定手机号<em class="red"> 已绑定</em> ({$user['mobile']})
+							</if> 					
+
+							<if condition="empty($user['mobile'])">
+								<a class="fr blues" onclick="binding()" href="javascript:">立即绑定</a>
+							<else />
+								<a class="fr blues" onclick="binding()" href="javascript:">解绑</a>
+							</if> 
+					</div>
+				</div>
+				<!-- 广告部分 -->
+				<div style="height:80px;"></div>
+				<div class="footbanner"><img src="__IMG__/banner.jpg" alt=""></div>
+			</div>
+		</div>
+		 <!-- 清除浮动 -->
+		<div class="clearfloat"></div>
+	</div>
+</div>
+
+<include file="Public/footer" />

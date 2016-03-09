@@ -1,0 +1,49 @@
+<include file="Public/header" />
+<include file="Public/top" />
+<include file="Public/menu" />
+
+ <!-- 登录  -->
+<div class="login-box">
+	 <div class="login-main-box">
+	 		<form id="log" action="" method="post">
+		 	<div class="login-main-left fl">
+		 		<p>第三方账号登录</p>
+		 		<div class="login-three bblue"><a href=""><i class="b-ico-logQQ"></i>QQ登录</a></div>
+		 		<div class="login-three bgreen"><a href=""><i class="b-ico-logWX"></i>微信登录</a></div>
+		 	</div>
+		 	<div class="login-main-right fl">
+		 		 <div class="login-head"><h3>欢迎登录哇图网</h3><a class="red fr" href="{:U('Log/logon')}">快速注册</a></div>
+		 		 <input id="username" class="login-input" type="text" name="member_name" placeholder="邮箱/用户名">
+		 		 <input id="password" class="login-input" type="password" name="pwd" placeholder="请输入密码">
+		 		 <div class="login-input"><input id="verify" type="text" name="verify" placeholder="验证码">
+		 		 	<div class="codeimg">
+		 		 		<img onclick="changecode()" class="verify reloadverify" src="{:U('Public/verify')}" id="codeimg" style="width: 100px; margin-top: -7px;">
+		 		 		<span onclick="changecode()" class="noqin reloadverify">看不清楚？换一张</span>
+		 		 	</div>
+		 		 </div>
+		 		 <p class="login-input" style="border:0;"><input type="checkbox" checked="checked"> 记住登录状态 <a class="fr" href="{:U('Log/forget')}">忘记密码</a></p>
+		 		 <a id="sub" class="orgion-b submitbtn" href="javascript:">登 录</a>
+		 	</div>
+		 	</form>
+				<script>
+					$("#sub").click(function(){
+						$("#log").submit();
+					});
+				</script>
+	 </div>
+</div>
+<!-- 登录 end -->
+
+<script>
+//刷新验证码
+var verifyimg = $(".verify").attr("src");
+$(".reloadverify").click(function(){
+    if( verifyimg.indexOf('?')>0){
+        $(".verify").attr("src", verifyimg+'&random='+Math.random());
+    }else{
+        $(".verify").attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
+    }
+});
+</script>
+
+<include file="Public/footer" />

@@ -1,0 +1,304 @@
+<include file="Public/header" />
+<include file="Public/top" />
+<include file="Public/menu" />
+
+ <link href="__CSS__/datepicker3.css" rel="stylesheet">
+<!-- AJAX上传 -->
+<link rel="stylesheet" href="__UPIFY__/uploadify.css">
+<script src="__UPIFY__/jquery.uploadify.min.js"></script>
+
+ <!-- 详情发布需求  -->
+<div class="details-rele-box back2">
+	<div class="details-fissue">
+		<a href="">发布需求</a>
+	</div>
+</div>
+<!-- 详情发布需求 end -->
+
+<div class="uploading-ht-box">
+	<div class="wrap">
+	  	<div class="admin-nav">
+	  		<div class="box-top-nav">位置：<a href="">首页</a><span> &gt; </span><a href="">发布需求</a><span> &gt; </span><a href="">画图</a> <a class="special fr" href="">任务管理</a></div>
+	  	</div>
+	</div>	
+
+
+
+	<form id="sub" acticon="" method="post" enctype="multipart/form-data">
+	<div class="admin-main-box">
+		<div class="wrap">
+			<div class="upload-ediet">
+				<h3>求助类型：
+					<label><input type="radio" name="goods_type" value="images" <if condition="$_GET['action'] eq images">checked="checked"</if>><em>找图</em></label>
+					<label><input type="radio" name="goods_type" value="font" <if condition="$_GET['action'] eq font">checked="checked"</if> ><em>找字体</em></label>
+					<label><input type="radio" name="goods_type" value="drawing" <if condition="$_GET['action'] eq drawing">checked="checked"</if> ><em>画图</em></label>
+					<label><input type="radio" name="goods_type" value="rebate" <if condition="$_GET['action'] eq rebate">checked="checked"</if> ><em>折扣下载</em></label>
+					<label><input type="radio" name="goods_type" value="concept" <if condition="$_GET['action'] eq concept">checked="checked"</if> ><em>拍图</em></label>
+				</h3>
+				<div class="admin-list-con-detail">
+				  <div class="no-original-box">			  
+					 <div class="image-list">
+						 <div class="preview-box fl">
+						     <!-- <label class="image-list-y" for="image-view"><input id="image-view" type="file">
+						     </label> -->
+						     
+						     <label style="float: left;" ><input id="file_upload" name="file_upload" type="file" multiple="true"></label>
+						     <br />
+						     
+						     <input type="text" name="img_id" id="img_id" value="" />
+						     <label class="add"></label>
+						     
+						     <br />
+						       <p>仅支持JPG，PNG格式，最大不可以超过5M</p>
+						 </div>
+
+<!-- ajax上传 -->
+       <script type="text/javascript">
+        var img_id = "";
+        	$(function() {
+                $('#file_upload').uploadify({
+                    'swf': '__UPIFY__/uploadify.swf',
+                    'uploader':"{:U('Home/Public/uploadify',array('session'=>session('member')['member_id'],'action'=>$_GET['action']))}",
+                    'multi' : false, //是否允许多张图片一起上传
+                    'onUploadSuccess':function(file,data,response){
+                    	var reg = /^-[1-9]\d*$/;
+                    	var res = reg.test(data);
+                     	if(res == false){
+                     		/* alert(data) */
+                     		var obj = jQuery.parseJSON(data);	//json格式
+							$(".add").append('<img src="__UPLOADS__/'+obj.res_goods_file+'" /  class="zuo">'); 
+                     		img_id+=obj.res_id+',';
+                     		alert('成功');
+                     		return false;
+	                    }else{
+	                    	alert("上传失败");
+	                    } 
+                     }
+                });
+            });
+        </script>						 
+						 
+						 <!-- 清浮动 -->
+							<div class="clearfloat"></div>	
+					</div>
+					<div class="detail-wrap"><span>图片标题：</span> <input class="ad-text" name="goods_name" type="text" placeholder="用概括的语言描述你的图片"><em class="red"> *</em></div>
+
+					<div class="detail-wrap"><span>悬赏金额：</span> <input class="ad-text ad-cost" type="text" name="goods_reward" > 哇图币(最低<em class="orange">1</em>哇图币，您当前可用余额为<em class="orange">{$member['predeposit']|ceil}</em>哇图币)　<a href=""><img src="img/chong.png" alt=""></a> <em class="red"> *</em></div>
+
+					<div class="detail-wrap"><span>截止时间：</span> 
+					
+					     <div class="form-group" id="data_3" style="width:105px; display: inline-block;">
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" class="ad-text ad-cost" value="<?php echo date('Y-m-d',time()); ?>">
+                            </div>
+                        </div>
+					
+				<!-- 	 2015年 
+						<select name="" id="">
+							<option value="">1</option>
+							<option value="">2</option>
+							<option value="">3</option>
+							<option value="">4</option>
+							<option value="">5</option>
+							<option value="">6</option>
+							<option value="">7</option>
+							<option value="">8</option>
+							<option value="">9</option>
+							<option value="">10</option>
+							<option value="">11</option>
+							<option value="">12</option>
+						</select>月
+						<select name="" id="">
+							<option value="">1</option>
+							<option value="">2</option>
+							<option value="">3</option>
+							<option value="">4</option>
+							<option value="">5</option>
+							<option value="">6</option>
+							<option value="">6</option>
+							<option value="">6</option>
+							<option value="">6</option>
+							<option value="">6</option>
+							<option value="">6</option>
+							<option value="">6</option>
+							<option value="">6</option>
+							<option value="">6</option>
+							<option value="">6</option>
+						</select>日
+						<select name="" id="">
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+							<option value="">1</option>
+						</select>时-->
+						<em>（时间期限1-5天）</em>  
+				    </div>
+
+				    <div class="detail-wrap"><span>相似度：</span> 
+				    
+				    <label class="vel"><input name="goods_degree" type="radio" checked="checked" value="100%">100% </label> 
+				    
+				    <label class="vel"><input name="goods_degree" type="radio" value="95% ">95% </label></div>
+
+				    <div class="detail-wrap"><span>图片格式：</span> 
+				    <label class="vel"><input name="goods_format" type="radio" checked="checked" value="JPG" >JPG </label>
+				    <label class="vel"><input name="goods_format" type="radio" value="PSD">PSD </label> 
+				    <label class="vel"><input name="goods_format" type="radio" value="AI">AI </label> 
+				    <label class="vel"><input name="goods_format" type="radio" value="CDR">CDR </label>
+					 其他
+					 <input class="ad-text ad-cost" type="text" id="goods_other" name="goods_other" placeholder="可不填写"></div>
+					
+					
+					<script>
+						$("#goods_other").click(function(){
+							$("input[name=goods_format]").attr('checked',false);
+						});
+						
+						$("input[name=goods_format]").change(function(){
+							$("input[name=goods_other]").val("");
+						});
+					</script>
+
+
+
+				    <div class="detail-wrap">
+						<span>印刷尺寸：</span>
+						<input class="ad-text ad-cost" type="text" placeholder="长(cm)" name="goods_width"> * <input class="ad-text ad-cost" name="goods_height" type="text" placeholder="宽(cm)">
+			 		</div>
+
+			 		<div class="detail-wrap">
+						<span>作品编号：</span> <input class="ad-text ad-cost" type="text" name="goods_order_sn" value="{$order_sn}" style="width: 200px" />
+			 		</div>
+
+			 		<div class="detail-wrap">
+						<span>作品描述：</span>
+						<textarea name="goods_desc" placeholder="你可以描述输入您的的其他详细需求:"></textarea>
+			 		</div>
+
+			 		<div class="detail-wrap">
+						<span> </span>
+					    <input type="checkbox" id="tyzc" >已查看并同意规定条款《原创非商业授权作品规定》
+						<input type="file" name="goods_file" />
+						<!-- <label class="zhukou" style="margin-left:150px;"><input style="display:none" type="file"> </label> -->
+						<!-- <p class="uppro" style="width:875px; text-align:right;"><em><i class="c-ico-sigh"></i>文件大于30M</em></p> -->
+						<!-- <p class="uppro" style="width:875px; text-align:right;"><em>附件: <i>1561234531.rar</i><a class="up-del" href=""></a></em></p> -->
+					</div>
+				
+
+					<div class="detail-wrap">
+						<span> </span>
+				 		<a class="orgion-b submitbtn inline-b" href="javascript:" onclick="zhifu()">确认发布</a>
+					</div>
+	 			  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</form>
+	
+	
+	
+</div>
+
+ <!-- 注意   发布流程 -->
+<div class="publishess">
+	<div class="wrap">
+	  <p><b>发布流程</b><span class="pub1">01 发布作品</span><span class="pub2">02 获得竞价</span><span class="pub3">03 竞拍完成</span><span class="pub4">04 转为出售</span></p>
+	  <p><b>发布流程</b><span class="pub5">01 参与竞拍</span><span class="pub4">02 支付竞款</span><span class="pub2">03 竞拍成功</span><span class="pub6">03 下载原图</span></p>
+	</div>
+</div>
+
+
+
+<!--foot nav  end-->
+<!-- 弹窗部分 -->
+<div class="modal-dialog-bg" style="display: none;"></div>
+ 
+<!-- 支付完成 -->
+	<div class="modal-wrapper" style="display:none;">
+		<div class="hint-box"> 
+		  <p class="hint-ts-styls"><i class="b-ico-succeed"></i>支付已完成，任务成功发布</p>	 
+		  <p class="hint-ts-styls"><a class="hint-qd-btu" href="">确定</a></p>		  
+		  <i  class="b-ico-close"></i>
+		</div>
+	</div>
+
+<!-- 支付失败失败 -->
+	<div class="modal-wrapper" style="display:none;">
+		<div class="hint-box"> 
+		  <p class="hint-ts-styls"><i class="b-ico-error"></i>支付未完成，任务发布失败</p>	 
+		  <p class="hint-ts-styls"><a class="hint-qd-btu" href="">确定</a></p>		  
+		  <i  class="b-ico-close"></i>
+		</div>
+	</div> 
+
+<!-- 支付确认 -->
+<div class="modal-wrapper seekhelp zhifu" style="display: none;">
+		<div class="hint-box"> 
+		  <p>账户余额: <em class="orange">{$member['predeposit']}</em> 哇图币 此次发布任务将由哇图网为您<b>托管<em class="red">5</em>哇图币。</b></p>
+		  <p><b>请输入支付密码：</b><input type="password" name="payment" id="payment" val="" > <a class="blue" href=""> 忘记密码？</a> </p>
+		  <p><label><input type="checkbox" id="zfyd" > 同意</label><a class="blue" href="">哇图网交易说明</a></p>
+		  <p><a id="affirm" class="but-shan" href="javascript:">立刻支付</a></p>
+		  <p class="font12"><i class="c-ico-tanh"></i>为保证任务效率哇图网将代管赏金至任务结束，赏金默认由发布者打赏。</p>
+		  <i class="b-ico-close"></i>
+		</div>	
+</div>
+
+<script>
+	function zhifu(){
+		var tyzc = $("#tyzc").is(":checked");
+		if(tyzc == false){
+			alert('请认真阅读规定条款《原创非商业授权作品规定》');
+			return false;
+		}
+		$(".zhifu").css({display:'block'});
+		$(".modal-dialog-bg").css({display:'block'});
+	}
+	
+	$(".b-ico-close").click(function(){
+		$("#payment").val('');
+		$("#zfyd").attr("checked",false);
+	});
+	
+	$("#affirm").click(function(){
+		var zfyd = $("#zfyd").is(":checked");
+		if(zfyd == false){
+			alert('请认真阅读哇图网交易说明');
+			return false;
+		}
+		var payment = $("#payment").val();
+		var URL = "{:U('Home/Demand/payment')}";
+		var data = {'payment':payment};
+		$.post(URL,data,function(res){
+			switch(res){
+				case '-1':
+					alert('非法操作');
+					break;
+				case '-2':
+					alert('支付密码错误');
+					break;
+				case '1':
+					$("#img_id").val(img_id);
+					$("#sub").submit();
+			}
+		});		
+	});
+
+</script>
+
+
+    <!-- 时间控件 -->
+    <script src="__JS__/bootstrap-datepicker.js"></script>
+    <!-- 时间jq代码 -->
+    <script src="__JS__/form-advanced-demo.min.js"></script>
+<include file="Public/footer" />

@@ -1,0 +1,207 @@
+<include file="Public/header" />
+<include file="Public/nav" />
+<link href="__CSS__/datepicker3.css" rel="stylesheet">
+
+<div class="admin-main-box">
+	<div class="wrap overhide mrg-bot">
+		<include file="Public/menu" />
+
+		<div class="admin-list-con fl">
+			<div class="admin-index-con-detail">
+				<form id="person" action="" method="post" enctype="multipart/form-data">
+				<div class="member-data-box">
+				  <div class="member-data-pic">
+					<div class="member-pic-box">
+						<img id="Member-img" src="__UPLOADS__/{$user['avatar']}" width="170" height="170" alt="">
+						<label class="pen" href=""><img src="__IMG__/pen.png" alt=""><input id="PenEdit" style="display:none" type="file" name="avatar" value=""></label>
+					</div>
+					 <span>大小不超过50K <br>尺寸：160* 160px<br>格式：JPG、PNG </span>
+				  </div>
+					<p><span>登录账号：</span><em>{$user['member_name']}</em></p>
+					<p><span>昵称：</span><em><input class="membeBox" name="nickname" type="text" value="{$user['nickname']}" placeholder="当前未设置昵称"></em></p>
+					<p><span>邮箱：</span><em>{$user['email']}<a class="blues" href="">（修改）</a></em></p>
+					<p><span>QQ：</span><em><input class="membeBox" name="member_qq" type="text" value="{$user['member_qq']}" placeholder="当前未设置QQ"></em></p>
+					<p><span>性别：</span><em><input name="gender" type="radio" <if condition="$user['gender'] eq 1">checked</if> value="1" >  男   <input name="gender" type="radio" <if condition="$user['gender'] eq 2">checked</if> value="2">  女  </em></p>
+					<div style="font-size: 16px; margin-bottom: 17px;"><span style="display: inline-block; width: 82px; text-align: right;">生日：</span>
+						<div style="width:200px; display: inline-block; margin-left:-4px">
+                        <div class="form-group" id="data_3">
+                            <label class="font-noraml"></label>
+                            <div class="input-group date">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" class="form-control membeBox" name="member_birthday" value="{$user['member_birthday']|date="Y-m-d",###}">
+                            </div>
+                        </div>					
+						</div>
+					</div>
+					<p><span>城市：</span><em>
+						
+						<select name="province" id="province" style="margin-left: -5px">
+		                    <if condition="$user['province'] eq ''">
+		                    	<option value="">请选择</option>
+		                    	<else />
+		                   		 <option value="{$user['province']}">{$user['province']|city_find="name",###}</option>
+		                    </if>
+		                    <volist name="province" id="vo">
+		                    <option value="{$vo['id']}">{$vo['name']}</option>
+		                    </volist>
+		                </select>
+		
+		                <select name="city" id="city">
+		                
+		                    <if condition="$user['city'] eq ''">
+		                    	<option value="">请选择</option>
+		                    	<else />
+		                   		 <option value="{$user['city']}">{$user['city']|city_find="name",###}</option>
+		                    </if>
+		                </select>
+							    
+		                <select name="area" id="area">
+		                	
+		                    <if condition="$user['area'] eq ''">
+		                    	<option value="">请选择</option>
+		                    	<else />
+		                   		 <option value="{$user['area']}">{$user['area']|city_find="name",###}</option>
+		                    </if>
+		                </select> 				    
+					    
+					    </em>
+					</p>
+					
+					<script>
+						$('#province').change(function(){
+							var province = $(this).val();
+							var URL = "{:U('Member/User/problem')}";
+							var data = {"province":province};
+							$.get(URL,data,function(res){
+								$("#city").empty();
+								$("#area").empty();
+								var html = res;
+								$('#city').append(html);
+							})
+	
+						});
+						
+						$('#city').change(function(){
+							var city = $(this).val();
+							var URL = "{:U('Member/User/problem')}";
+							var data = {"city":city};
+							$.get(URL,data,function(res){
+								$("#area").empty();
+								var html = res;
+								$('#area').append(html);
+							})
+	
+						})						
+					</script>
+					
+					
+					<a class="sumb-but" onclick="succeedplay()" style="font-size:18px; display:inline-block; margin-top:20px;" href="javascript:">确定</a>
+				</div>
+				
+				</form>
+				
+			</div>
+		</div>
+		 <!-- 清除浮动 -->
+		<div class="clearfloat"></div>
+	</div>
+</div>
+
+
+<!-- 弹窗部分 -->
+<div class="modal-dialog-bg" style="display: none;"></div>
+<!-- 悬赏输入支付密码 -->
+	<div class="modal-wrapper modal-item-1" style="display:none;">
+		<div class="hint-box"> 
+		  <p>悬赏后，哇图币将直接进入对方账户，请确认稿件在悬赏。</p>	 
+		  <p><b>请输入支付密码：</b><input type="password"> <a class="blue" href=""> 忘记密码？</a> </p>
+		  <p><input type="checkbox"> 同意<a class="blue" href="">哇图网求图求助协议</a></p>
+		  <p><a id="affirm" class="but-shan" href="javascript:">立刻支付</a></p>
+		  <i  class="b-ico-close"></i>
+		</div>
+	</div>
+<!-- 悬赏成功 -->
+	<div class="modal-wrapper modal-item-2" style="display:none;">
+		<div class="hint-box"> 
+		  <p class="hint-ts-styls"><img src="__IMG__/win.png" alt=""></p>	 
+		  <p class="hint-ts-styls"><a class="hint-qd-btu" href="">确定</a></p>		  
+		  <i  class="b-ico-close"></i>
+		</div>
+	</div>
+<!-- 悬赏失败 -->
+	<div class="modal-wrapper modal-item-3" style="display:none;">
+		<div class="hint-box"> 
+		  <p class="hint-ts-styls"><img src="__IMG__/fall.png" alt=""></p>	 
+		  <p class="hint-ts-styls"><a class="hint-qd-btu" href="">确定</a></p>		  
+		  <i  class="b-ico-close"></i>
+		</div>
+	</div>
+<!-- 追加哇图币 -->
+	<div class="modal-wrapper modal-item-4" style="display:none;">
+		<div class="hint-box"> 
+		  <p>追加 <input class="hint-inp-text" type="text"> 哇图币(追加不可低于1哇图币)</p>	 
+		  <p>账户余额: <em class="orange">520.00</em> 哇图币 此次追加<b>将扣除<em class="red">50</em>哇图币</b>。请输入支付密码再追加。</p>
+		  <p><b>请输入支付密码：</b><input type="password"> <a class="blue" href=""> 忘记密码？</a> </p>
+		  <p><input type="checkbox"> 同意<a class="blue" href="">哇图网求图求助协议</a></p>
+		  <p><a id="affirm" class="but-shan" href="javascript:">立刻支付</a></p>
+		  <i  class="b-ico-close"></i>
+		</div>
+	</div>
+
+
+<!-- 弹窗 保存成功 -->
+	<div class="modal-wrapper succeed-play" style="display:none;">
+		<div class="hint-box"> 
+		  <h3>提示</h3>
+		  <p class="hint-ts-styls"><i class="b-ico-succeed"></i>保存成功</p>	 
+		  <p class="hint-ts-styls"><a class="hint-qd-btu" href="javascript:" id="sub">确定</a></p>		  
+		  <i class="b-ico-close"></i>
+		</div>
+	</div>
+<!-- 弹窗 保存失败 -->
+	<div class="modal-wrapper failplay" style="display:none;">
+		<div class="hint-box">
+		  <h3>提示</h3>
+		  <p class="hint-ts-styls"><i class="b-ico-error"></i>保存失败</p>	 
+		  <p class="hint-ts-styls"><a class="hint-qd-btu" href="">确定</a></p>		  
+		  <i class="b-ico-close"></i>
+		</div>
+	</div>
+
+
+<script>
+    $(function(){
+    	// 图片上传js
+ 		 $('#PenEdit').change(function(){
+         	 var $file=this.files[0];
+         	 var osrc=URL.createObjectURL($file);
+         	 var $pic=$('#Member-img');
+         	 if($file.size/1024>5120)
+             {
+                alert("图片最大不可以超过5M!");
+                return 0;
+             }
+         	 $(this).attr('value',osrc);
+             $pic.attr('src',osrc);
+             // $pic.css({'background-image':'url('+osrc+')'}); //修改预览背景图片
+         });
+   });
+    
+    
+    $("#sub").click(function(){
+    	$("#person").submit();
+    });
+    
+</script>
+
+
+
+
+
+
+    <!-- 时间控件 -->
+    <script src="__JS__/bootstrap-datepicker.js"></script>
+    <!-- 时间jq代码 -->
+    <script src="__JS__/form-advanced-demo.min.js"></script>
+
+<include file="Public/footer" />

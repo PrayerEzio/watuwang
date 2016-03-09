@@ -1,0 +1,10 @@
+Uploads/
+ThinkYun/
+*.log
+*.bak
+WebApp/Runtime/
+WebApp/Common/Conf/
+.settings/
+.buildpath
+.project
+index.php

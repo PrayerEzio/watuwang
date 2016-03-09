@@ -1,0 +1,34 @@
+<include file="Public/header" />
+<include file="Public/nav" />
+
+<div class="admin-main-box">
+	<div class="wrap overhide mrg-bot">
+		<include file="Public/menu" />
+
+		<div class="manage-list-con fl">
+		   <h3 class="common-title">登录日志</h3>
+		   <div class="logon-rz">
+		   	 <div class="rz-item"><span class="man-w8">用户名</span><span class="man-w8">浏览器版本</span><span class="man-w8">时间</span><span class="man-w8">IP</span></div>
+
+	<volist name="list" id="vo">
+ 	 <div class="rz-item"><span class="man-w8">{$vo['member_id']|user_name}</span><span class="man-w8">{$vo['browser']}</span><span class="man-w8">{$vo['time']|date="Y-m-d H:i:s",###}</span><span class="man-w8">{$vo['ip']}</span></div>
+</volist>
+
+		   </div>
+		   <!-- 翻页 -->
+		   		<div class="pro_page">  
+					<div>
+					{$show}
+					</div>		
+				</div>
+
+				<!-- 广告部分 -->
+				<div style="height:80px;"></div>
+				<div class="footbanner"><img src="img/banner.jpg" alt=""></div>
+		</div>
+		 <!-- 清除浮动 -->
+		<div class="clearfloat"></div>
+	</div>
+</div>
+
+<include file="Public/footer" />

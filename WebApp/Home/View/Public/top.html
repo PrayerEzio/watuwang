@@ -1,0 +1,76 @@
+	<if condition="$user eq ''">
+	
+	<div class="top">
+		<div class="wrap">
+			<span>互联网一站式服务平台！</span> 
+			<div class="l-r-box fr">
+				<i class="b-ico-member"></i><a class="log" href="{:U('Public/login')}">登录</a> / <a class="log" href="{:U('Log/logon')}">注册</a> <!-- <a class="top-k" href="">开通VIP</a> -->
+				<div class="thirdparty fr">
+					<a class="one" href=""><i class="b-ico-qq"></i>QQ登录</a>&nbsp;&nbsp;&nbsp;<a class="two" href=""><i class="b-ico-wx"></i>微信登录</a>
+			    </div>
+			</div>
+			<span class="tel"><i class="b-ico-kefu"></i>客服热线：1230-78945654</span>
+		</div>	
+	</div>
+	
+	
+	
+	<else />
+		<div class="top">
+		<div class="wrap">
+			<span>互联网一站式服务平台！</span> 
+			<div class="l-r-box fr">
+			  	<div class="memberinfo"> <a id="info" href="znx.html"><i class="b-ico-meminfo on"> </i></a> <img src="__UPLOADS__/{$user['avatar']}" width="25" height="25" alt=""><a id="menu" href=""><span class="mem-name">回寄来了 <i class="b-ico-5v5"></i></span></a>
+			<!--消息通知  -->
+					
+					<div class="mem-mess-box" style="display:none">
+						<div class="arrow arr1"></div>
+				  		<div class="mem-info-mess">
+				  			<p><em>9-2</em> <a href="znx.html">通知：VIP特权增加新的特权</a></p>
+				  			<p><em>9-2</em> <a href="znx.html">通知：VIP特权增加新的特权</a></p>
+				  		</div>
+			  		</div>
+
+			  		<div class="mem-info-box" style="display:none">
+			  			<div class="arrow arr2"></div>
+				  			<div class="mem-info-infos">
+					  			<p><a href="{:U('Member/Index/index')}"><i class="b-ico-ht"></i>用户后台</a></p>
+					  			<p><a href="member-my.html"><i class="b-ico-zy"></i>个人主页</a></p>
+					  			<p><a href="wdsc.html"><i class="b-ico-sc"></i>我的收藏</a></p>
+					  			<p><a href=""><i class="b-ico-cz"></i>充值</a></p>
+					  			<p class="bord"><a href="{:U('Home/Public/logout')}"><i class="b-ico-tc"></i>退出</a></p>
+				  			</div>
+			  		</div>
+			 <!--消息通知  end-->
+			  	</div>	 
+			</div>
+			<span class="tel"><i class="b-ico-kefu"></i>客服热线：1230-78945654</span>
+		</div>	
+	</div>
+	
+	</if>
+	
+	
+	<script>
+	$(function(){
+		 $('#info').mouseover(function(){
+		 	$('.mem-mess-box').show();
+		 });
+		 $('.mem-mess-box').hover(function(){
+		 	$(this).show();
+		 },function(){
+		 	$(this).hide();
+		 });
+
+		 $('#menu').mouseover(function(){
+		 	$('.mem-info-box').show();
+		 });
+		 $('.mem-info-box').hover(function(){
+		 	$(this).show();
+		 },function(){
+		 	$(this).hide();
+		 });
+		 
+
+	});
+</script>

@@ -1,0 +1,186 @@
+<include file="Public/header" />
+<include file="Public/nav" />
+<!-- AJAX上传 -->
+<link rel="stylesheet" href="__UPIFY__/uploadify.css">
+<script src="__UPIFY__/jquery.uploadify.min.js"></script>
+
+<div class="admin-main-box">
+	<form id="sub" action="{:U('Works/piece_manage_edit')}" method="post">
+	<div class="wrap overhide mrg-bot">
+		<include file="Public/menu" />
+		<div class="admin-list-con fl">
+			<input type="hidden" name="goods_id" value="{$_GET['goods_id']}" />
+			<input type="hidden" id="img_id" name="img_id" value="{$goods['img_id']}" />
+			<h3>作品编辑</h3>
+			
+			
+			<div class="admin-list-con-detail">
+				<div class="image-list">
+					<div class="preview-box fl add">
+					       <p>仅支持JPG，PNG格式，最大不可以超过5M</p>
+					       
+					       <volist name="img_data" id="vo">
+					       <img src="__UPLOADS__/{$vo['img_link']}" class="zuo">
+					       </volist>
+					 </div>
+
+					<div class="result-box fl">
+						<ul>
+							<li>
+								<input id="file_upload" name="file_upload" type="file" multiple="true">
+								<p>请上传实景效果图<em class="orange">2张</em>，这将大大增加出售成功率</p>
+							</li>
+						</ul>
+					</div>
+					<!-- 清除浮动 -->
+						<div class="clearfloat"></div>
+				</div>
+				
+<!-- ajax上传 -->
+       <script type="text/javascript">
+        var img_id = "";
+        	$(function() {
+                $('#file_upload').uploadify({
+                    'swf': '__UPIFY__/uploadify.swf',
+                    'uploader':"{:U('Public/uploadify_edit',array('session'=>session('member')['member_id'],'goods_id'=>$_GET['goods_id']))}",
+                    'multi' : false, //是否允许多张图片一起上传
+                    'onUploadSuccess':function(file,data,response){
+                    	var reg = /^-[1-9]\d*$/;
+                    	var res = reg.test(data);
+                     	if(res == false){
+                     		/* alert(data) */
+                     		var obj = jQuery.parseJSON(data);	//json格式
+							$(".add").append('<img src="__UPLOADS__/'+obj.res_goods_file+'" /  class="zuo">'); 
+                     		img_id+=obj.res_id+',';
+                     		alert('成功');
+                     		return false;
+	                    }else{
+	                    	alert("上传失败");
+	                    } 
+                     }
+                });
+            });
+        	
+        </script>					
+				
+
+				<div class="detail-wrap"><span>图片标题：</span> <input class="ad-text" type="text" name="goods_name" value="{$goods['goods_name']}" placeholder="用概括的语言描述你的图片"><em class="red"> *</em></div>
+
+				<div class="detail-wrap"><span>关键词 ：</span> <input class="ad-text" type="text" name="goods_key" value="{$goods['goods_key']}" placeholder="关键词最少三组，中间用空格分开，需准确描述图片中出现的元素"><em class="red"> *</em></div>
+
+				<div class="detail-wrap">
+					<span>选择分类：</span>
+					<select name="goods_type" id="goods_type">\
+						<option value="">--请选择--</option>					
+						<option value="images" <if condition="$goods['goods_type'] eq images">selected</if>>找图</option>
+						<option value="font" <if condition="$goods['goods_type'] eq font">selected</if> >找字体</option>
+						<option value="drawing" <if condition="$goods['goods_type'] eq drawing">selected</if> >画图</option>
+						<option value="rebate" <if condition="$goods['goods_type'] eq rebate">selected</if> >折扣下载</option>
+						<option value="concept" <if condition="$goods['goods_type'] eq concept">selected</if> >购图</option>
+					</select>
+					<em class="red"> *</em>　　 
+					
+					
+					<span>选择专辑：</span>
+					<select name="goods_album" id="goods_album">
+						<option value="">--请选择--</option>
+						<volist name="album_list" id="vo">
+						<option value="{$vo['album_id']}" <if condition="$goods['album_id'] eq $vo['album_id']" >selected</if> >{$vo['album_name']} </option>
+						</volist>
+					</select>
+					<em class="red"> *</em>
+			 	</div>
+
+			 	<div class="detail-wrap"><span>价格 ：</span> <input class="ad-text ad-cost" type="text" name="goods_reward" id="goods_reward" value="{$goods['goods_reward']}" /> 哇图币(最低<em class="orange">1</em>哇图币，您当前可用余额为<em class="orange">{$member['predeposit']|ceil}</em>哇图币)　<a href=""><img src="img/chong.png" alt=""></a> <em class="red"> *</em></div>
+<script>
+	$("#goods_reward").blur(function(){
+		var pay = $(this).val();
+		if(pay < 1){
+			alert('出售哇图币必须大于1哇图币');
+			$(this).val(1);
+		}
+	})
+</script>
+
+			 	<div class="detail-wrap">
+					<span>颜色模式：</span>
+					<select name="goods_colour" id="goods_colour">
+						<option value="">--请选择--</option>
+						<option value="RGB" <if condition="$goods['goods_colour'] eq RGB">selected</if> >RGB</option>
+						<option value="CMYK" <if condition="$goods['goods_colour'] eq CMYK">selected</if> >CMYK</option>
+					</select>　
+					<em>作图工具版本：</em>
+					<input class="ad-text ad-cost" type="text" name="goods_edition" placeholder="例:ps6" value="{$goods['goods_edition']}"> <em class="red"> *</em>
+			 	</div>
+
+			 	<div class="detail-wrap">
+					<span>尺寸：</span>
+					<input class="ad-text ad-cost" type="text" name="goods_width" placeholder="宽(像素)" value="{$goods['goods_width']}" > * <input class="ad-text ad-cost" type="text" name="goods_height" placeholder="高(像素)" value="{$goods['goods_height']}" > <em class="red"> *</em>
+			 	</div>
+
+			 	<div class="detail-wrap">
+					<span>文档：</span>
+					<input class="ad-text ad-cost" type="text" name="goods_file_width" placeholder="长(毫米)" value="{$goods['goods_file_width']}" > * <input class="ad-text ad-cost" type="text" name="goods_file_higth" placeholder="宽(毫米)" value="{$goods['goods_file_higth']}" > <em class="red"> *</em>
+			 	</div>
+
+<!-- 			 	<div class="detail-wrap">
+					<span>路径：</span>
+					<label><input name="rad" type="radio"> 有</label>　　
+					<label><input name="rad" type="radio"> 无</label>
+			 	</div> -->
+
+			 	<div class="detail-wrap">
+					<span>作品编号：</span><em>{$goods['goods_order_sn']}</em>
+			 	</div>
+
+			 	<div class="detail-wrap">
+					<span>作品描述：</span>
+					<textarea name="goods_desc" placeholder="你可以描述输入您的的其他详细需求:" >{$goods['goods_desc']}</textarea>
+			 	</div>
+
+				<div class="detail-wrap">
+					<span> </span>
+					<input id="tongyi" type="checkbox" >已查看并同意规定条款《原创非商业授权作品规定》<em class="red"> *</em>
+				</div>
+
+				<div class="detail-wrap">
+					<span> </span>
+				 	<a class="orgion-b submitbtn inline-b" id="su" href="javascript:">提交审核</a>
+				</div>
+
+				<div class="detail-wrap">
+					<span> </span>
+					<p class="inline-b">注意事项：<br>
+						1:所有上传作品需为源文件（可编辑模板），预览图与所上传的源文件需要保持一致<br>
+						2:预览图有人物脸部需模糊，不得含有明显的联系方式，如QQ、电话、网址、二维码<br>
+						3:标题请用一句话来描述，关键词包含素材风格、用途、内容、等词组，一般3组以上
+					</p>
+				</div>
+			</div>
+
+			<!-- 广告部分 -->
+				<div style="height:80px;"></div>
+				<div class="footbanner"><img src="img/banner.jpg" alt=""></div>
+		</div>
+		 <!-- 清除浮动 -->
+		<div class="clearfloat"></div>
+	</div>
+	</form>
+</div>
+<script>
+$("#su").click(function(){
+	var tongyi = $("#tongyi[type='checkbox']").is(':checked')
+	if(tongyi == false){
+		alert('请先阅读原创非商业授权作品规定');
+		return false;
+	}
+	var i_id = $("#img_id").val();
+	
+	$("#img_id").val(i_id+img_id);
+	$("#sub").submit();
+})
+
+
+</script>
+
+<include file="Public/footer" />

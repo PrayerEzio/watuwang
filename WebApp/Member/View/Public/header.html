@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>欢迎来到哇图网！</title>
+<link rel="stylesheet" href="__CSS__/style.css">
+<script src="__JS__/jquery-1.11.3.min.js"></script>
+<script src="__JS__/jquery.SuperSlide.2.1.1.js"></script>
+<script src="__JS__/com.js"></script>
+<script src="__JS__/jquery.masonry.min.js"></script>
+</head>
+<body>
+	<div class="top">
+		<div class="wrap">
+			<span>互联网一站式服务平台！</span> 
+			<div class="l-r-box fr">
+			  	<div class="memberinfo"> <a id="info" href="znx.html"><i class="b-ico-meminfo on"> </i></a> <img src="__UPLOADS__/{$user['avatar']}" width="25" height="25" alt=""><a id="menu" href=""><span class="mem-name">回寄来了 <i class="b-ico-5v5"></i></span></a>
+			<!--消息通知  -->
+					
+					<div class="mem-mess-box" style="display:none">
+						<div class="arrow arr1"></div>
+				  		<div class="mem-info-mess">
+				  			<p><em>9-2</em> <a href="znx.html">通知：VIP特权增加新的特权</a></p>
+				  			<p><em>9-2</em> <a href="znx.html">通知：VIP特权增加新的特权</a></p>
+				  		</div>
+			  		</div>
+
+			  		<div class="mem-info-box" style="display:none">
+			  			<div class="arrow arr2"></div>
+				  			<div class="mem-info-infos">
+					  			<p><a href="{:U('Member/Index/index')}"><i class="b-ico-ht"></i>用户后台</a></p>
+					  			<p><a href="member-my.html"><i class="b-ico-zy"></i>个人主页</a></p>
+					  			<p><a href="wdsc.html"><i class="b-ico-sc"></i>我的收藏</a></p>
+					  			<p><a href=""><i class="b-ico-cz"></i>充值</a></p>
+					  			<p class="bord"><a href="{:U('Home/Public/logout')}"><i class="b-ico-tc"></i>退出</a></p>
+				  			</div>
+			  		</div>
+			 <!--消息通知  end-->
+			  	</div>	 
+			</div>
+			<span class="tel"><i class="b-ico-kefu"></i>客服热线：1230-78945654</span>
+		</div>	
+	</div>	
+	
+<script>
+	$(function(){
+		 $('#info').mouseover(function(){
+		 	$('.mem-mess-box').show();
+		 });
+		 $('.mem-mess-box').hover(function(){
+		 	$(this).show();
+		 },function(){
+		 	$(this).hide();
+		 });
+
+		 $('#menu').mouseover(function(){
+		 	$('.mem-info-box').show();
+		 });
+		 $('.mem-info-box').hover(function(){
+		 	$(this).show();
+		 },function(){
+		 	$(this).hide();
+		 });
+		 
+
+	});
+</script>
+
+
+
+	<div class="seek-box">
+		<div class="wrap">
+			<a class="fl" href="index.html" ><img style="vertical-align: top;" src="__IMG__/logo1.png" alt=""></a> 
+			
+			<div class="seek-bord fr">
+			  <span class="seek"><input type="text" placeholder="关键词/编号/类别"></span>
+			   <span class="seek-but"><input type="submit" value=" "></span>
+			</div>
+
+
+			<div class="head-nav fr">
+				<ul>
+				 	<li <if condition="CONTROLLER_NAME EQ Index && ACTION_NAME EQ index">class="on"</if>><a href="{:U('Home/Index/index')}">首页</a></li>
+				 	<li <if condition="CONTROLLER_NAME EQ Goods && ACTION_NAME EQ images">class="on"</if>><a href="{:U('Home/Goods/images')}">找图</a></li>
+				 	<li <if condition="CONTROLLER_NAME EQ Goods && ACTION_NAME EQ font">class="on"</if>><a href="{:U('Home/Goods/font')}">找字体</a></li>
+				 	<li <if condition="CONTROLLER_NAME EQ Goods && ACTION_NAME EQ drawing">class="on"</if>><a href="{:U('Home/Goods/drawing')}">画图</a></li>
+				 	<li <if condition="CONTROLLER_NAME EQ Goods && ACTION_NAME EQ rebate">class="on"</if>><a href="{:U('Home/Goods/rebate')}">折扣下载</a></li>
+				 	<li <if condition="CONTROLLER_NAME EQ Goods && ACTION_NAME EQ concept">class="on"</if>><a href="{:U('Home/Goods/concept')}">购图</a></li>
+				 </ul>
+				 <!-- 清除浮动 -->
+				<div class="clearfloat"></div>
+			 </div>
+			<!-- <div class="thirdparty fr">
+				<a class="one" href=""><i class="b-ico-qq"></i>QQ登录</a>&nbsp;&nbsp;&nbsp;<a class="two" href=""><i class="b-ico-wx"></i>微信登录</a>
+			</div> -->
+			<!-- 清除浮动 -->
+				<div class="clearfloat"></div>
+		</div>
+	</div>
+

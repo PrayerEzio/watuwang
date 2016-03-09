@@ -1,0 +1,105 @@
+<include file="Public/header" />
+<include file="Public/nav" />
+<div class="admin-main-box">
+	<div class="wrap overhide mrg-bot">
+		<include file="Public/menu" />
+
+		<div class="admin-list-con fl">
+			<div class="collect-con-detail">
+				<h3 class="common-title">我的收藏</h3>
+				<!-- 瀑布流 -->
+					<div class="h-water-box">
+		
+							<div id="main-content" class="water-main-box">
+							  <div class="water-item opacity">
+							  	<div class="it-snav">
+							  		<a href=""><img src="__IMGS__/water.jpg" width="250" alt=""></a>
+							  		<p class="ite-sc"><a class="collect" onclick="collect(this)"  href="javascript:">收藏</a><span>|</span><a href="">下载</a></p>
+							    </div>
+							  	<p><a href="">中国水墨画装饰画</a></p>
+							  	<p>收藏于：2015-12-06 22:30:09</p>
+							  </div>
+
+							  <div class="water-item opacity">
+							  	<div class="it-snav">
+							  		<a href=""><img src="__IMGS__/water1.jpg" width="250" alt=""></a>
+							  		<p class="ite-sc"><a class="collect" onclick="collect(this)"  href="javascript:">收藏</a><span>|</span><a href="">下载</a></p>
+							    </div>
+							  	<p><a href="">中国水墨画装饰画</a></p>
+							  	<p>收藏于：2015-12-06 22:30:09</p>
+							  </div>
+
+							  <div class="water-item opacity">
+							  	<div class="it-snav">
+							  		<a href=""><img src="__IMGS__/water.jpg" width="250" alt=""></a>
+							  		<p class="ite-sc"><a class="collect" onclick="collect(this)"  href="javascript:">收藏</a><span>|</span><a href="">下载</a></p>
+							    </div>
+							  	<p><a href="">中国水墨画装饰画</a></p>
+							    <p>收藏于：2015-12-06 22:30:09</p>
+							  </div>
+
+							  <div class="water-item opacity">
+							  	<div class="it-snav">
+							  		<a href=""><img src="__IMGS__/water1.jpg" width="250" alt=""></a>
+							  		<p class="ite-sc"><a class="collect" onclick="collect(this)"  href="javascript:">收藏</a><span>|</span><a href="">下载</a></p>
+							    </div>
+							  	<p><a href="">中国水墨画装饰画</a></p>
+							  	<p>收藏于：2015-12-06 22:30:09</p>
+							  </div>
+
+							  <div class="water-item opacity">
+							  	<div class="it-snav">
+							  		<a href=""><img src="__IMGS__/water3.jpg" width="250" alt=""></a>
+							  		<p class="ite-sc"><a class="collect" onclick="collect(this)"  href="javascript:">收藏</a><span>|</span><a href="">下载</a></p>
+							    </div>
+							  	<p><a href="">中国水墨画装饰画</a></p>
+							  	<p>收藏于：2015-12-06 22:30:09</p>
+							  </div>
+
+							  <div class="water-item opacity">
+							  	<div class="it-snav">
+							  		<a href=""><img src="__IMGS__/water2.jpg" width="250" alt=""></a>
+							  		<p class="ite-sc"><a class="collect" onclick="collect(this)"  href="javascript:">收藏</a><span>|</span><a href="">下载</a></p>
+							    </div>
+							  	<p><a href="">中国水墨画装饰画</a></p>
+							  	<p>收藏于：2015-12-06 22:30:09</p>
+							  </div>
+
+							  <div class="water-item opacity">
+							  	<div class="it-snav">
+							  		<a href=""><img src="__IMGS__/water1.jpg" width="250" alt=""></a>
+							  		<p class="ite-sc"><a class="collect" onclick="collect(this)"  href="javascript:">收藏</a><span>|</span><a href="">下载</a></p>
+							    </div>
+							  	<p><a href="">中国水墨画装饰画</a></p>
+							  	<p>收藏于：2015-12-06 22:30:09</p>
+							  </div>
+
+							</div>
+		 
+					</div>
+			  </div>
+			  <!-- 广告部分 -->
+				<div style="height:80px;"></div>
+				<div class="footbanner"><img src="img/banner.jpg" alt=""></div>
+		</div>
+		 <!-- 清除浮动 -->
+		<div class="clearfloat"></div>
+	</div>
+</div>
+<script>
+$(function(){  
+   $('#main-content').masonry({
+    itemSelector : '.water-item',
+    isAnimated: false,
+    gutterWidth:43
+  });  
+   var $container = $('#main-content');  
+	$container.imagesLoaded( function(){  
+	    $container.masonry({  
+	        itemSelector : '.water-item'
+	    });  
+	});
+});
+</script>
+
+<include file="Public/footer" />

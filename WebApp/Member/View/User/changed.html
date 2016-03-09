@@ -1,0 +1,215 @@
+<include file="Public/header" />
+<include file="Public/nav" />
+<div class="admin-main-box">
+	<div class="wrap overhide mrg-bot">
+		<include file="Public/menu" />
+
+		<div class="admin-list-con fl">
+			<div class="admin-index-con-detail">
+				
+				
+				<div class="sfrz-main-box">
+					<h3 class="common-title">登录密码</h3>
+					<form id="sub_data" action="" method="post">
+					<div class="sfrz-edit">
+						<p><span>原密码：</span><input id="oldpwd"  type="password" name="oldpwd"></p>
+						<p><span>新密码：</span><input id="pwd"  type="password" name="pwd"></p>
+						<p><span>确认新密码：</span><input id="payment_pwd"  type="password" name="payment_pwd"></p>
+<!-- 						<div class="deal"><span>多人登录：</span><input type="checkbox">不允许 只允许一人同时登录这个账号，系统推荐选项</div>
+						<div class="deal"><span>&nbsp;</span><input type="checkbox">允许 允许多人同时登录这个账号，较不安全</div> -->
+						<p><span>&nbsp;</span><a class="orgion-b submitbtn inline-b tijiao1" href="javascript:">确定</a></p>
+					</div>
+					</form>
+					
+					<script>
+						$(".tijiao1").click(function(){
+							var URL = "{:U('Member/User/changed')}";
+							
+							var oldpwd = $("#oldpwd").val();
+							var pwd = $("#pwd").val();
+							var payment_pwd = $("#payment_pwd").val();
+							var data = {"type":1,"oldpwd":oldpwd,"pwd":pwd,"payment_pwd":payment_pwd}
+							$.post(URL,data,function(res){
+								switch(res){
+									case '-1':
+										var text="请认真填写";
+										$("#text2").empty();
+										$("#text2").text(text);
+										failplay();
+										break;
+									case '-2':
+										var text="两次密码不一致";
+										$("#text2").empty();
+										$("#text2").text(text);
+										failplay();
+										break;
+									case '-10':
+										var text="非法操作";
+										$("#text2").empty();
+										$("#text2").text(text);
+										failplay();
+										break;
+									case '-3':
+										var text="原始密码错误";
+										$("#text2").empty();
+										$("#text2").text(text);
+										failplay();
+										break;
+									case '1':
+										var text="修改成功";
+										$("#text").empty();
+										$("#text").text(text);
+										succeedplay();
+										break;
+									default:
+										var text="非法操作";
+										$("#text2").empty();
+										$("#text2").text(text);
+										failplay();
+										break;
+								}	
+							})
+						});
+					</script>
+					
+					<h3 class="common-title">支付密码<a class="font12 blues" href="">（重置支付密码）</a></h3>
+					<form id="sub_data2" action="" method="post">
+					<div class="sfrz-edit">
+						<p><span>原密码：</span><input id="oldpayment" name="oldpayment" type="password"></p>
+						<p><span>新密码：</span><input id="payment" name="payment" type="password"></p>
+						<p><span>确认新密码：</span><input id="payment_payment" name="payment_payment" type="password"></p>
+						<p><span>&nbsp;</span><a class="orgion-b submitbtn inline-b tijiao2"  href="javascript:">确定</a></p>
+					</div>
+					</form>
+					
+					
+					
+					<script>
+						$(".tijiao2").click(function(){
+							var URL = "{:U('Member/User/changed')}";
+							
+							var oldpayment = $("#oldpayment").val();
+							var payment = $("#payment").val();
+							var payment_payment = $("#payment_payment").val();
+							
+							var data = {"type":2,"oldpayment":oldpayment,"payment":payment,"payment_payment":payment_payment}
+							$.post(URL,data,function(res){
+								switch(res){
+									case '-1':
+										var text="请认真填写";
+										$("#text2").empty();
+										$("#text2").text(text);
+										failplay();
+										break;
+									case '-2':
+										var text="两次密码不一致";
+										$("#text2").empty();
+										$("#text2").text(text);
+										failplay();
+										break;
+									case '-10':
+										var text="非法操作";
+										$("#text2").empty();
+										$("#text2").text(text);
+										failplay();
+										break;
+									case '-3':
+										var text="原始密码错误";
+										$("#text2").empty();
+										$("#text2").text(text);
+										failplay();
+										break;
+									case '1':
+										var text="修改成功";
+										$("#text").empty();
+										$("#text").text(text);
+										succeedplay();
+										break;
+									default:
+										var text="非法操作";
+										$("#text2").empty();
+										$("#text2").text(text);
+										failplay();
+										break;
+								}
+							})
+						});
+					</script>					
+					
+					
+					
+				</div>
+				
+				
+
+			</div>
+		</div>
+		 <!-- 清除浮动 -->
+		<div class="clearfloat"></div>
+	</div>
+</div>
+
+<!-- 弹窗部分 -->
+<div class="modal-dialog-bg" style="display: none;"></div>
+<!-- 弹窗 身份认证提醒 -->
+ 	<div class="modal-wrapper" style="display:none;">
+		<div class="hint-box"> 
+		  <h3>身份认证提醒</h3>
+		  <p class="hint-ts-styls">您还没认证个人信息，请先进行身份认证</p>	 
+		  <p class="hint-ts-styls"><a class="hint-qd-btu" onclick="closeplay()" style="background:#474747; color:#fff;" href="javascript:">认证</a></p>		  
+		  <i class="b-ico-close"></i>
+		</div>
+	</div>
+	
+	
+<!-- 弹窗 资料提交成功 -->
+	<div class="modal-wrapper succeed-play" style="display:none;">
+		<div class="hint-box"> 
+		  <h3>提示</h3>
+		  <p class="hint-ts-styls" ><i class="b-ico-succeed"></i><span id="text"></span></p>	 
+		  <p class="hint-ts-styls"><a class="hint-qd-btu sub" href="javascript:">确定</a></p>		  
+		  <i class="b-ico-close"></i>
+		</div>
+	</div>	
+
+
+<!-- 弹窗 资料提交失败 -->
+	<div class="modal-wrapper failplay" style="display:none;">
+		<div class="hint-box">
+		  <h3>提示</h3>
+		  <p class="hint-ts-styls sub"><i class="b-ico-error"></i><span id="text2"></span></p>	 
+		  <p class="hint-ts-styls"><a class="hint-qd-btu" href="">确定</a></p>		  
+		  <i class="b-ico-close"></i>
+		</div>
+	</div>
+
+
+
+<script>
+$(".sub").click(function(){
+	$('.modal-dialog-bg').hide();
+	$('.succeed-play').hide();
+});
+</script>
+
+
+<!-- 弹窗 新密码不能和原密码一致 -->
+	<div class="modal-wrapper" style="display:none;">
+		<div class="hint-box">
+		  <h3>提示</h3>
+		  <p class="hint-ts-styls" style="font-size:14px;"><i class="b-ico-error"></i><b>新密码不能和原密码一致</b></p>	 
+		  <p class="hint-ts-styls" style="text-align:right;"><a class="hint-qd-btu" style="width: 70px; height: 25px; line-height: 25px; font-size: 14px;" href="">确定</a></p>		  
+		  <i class="b-ico-close"></i>
+		</div>
+	</div>
+
+<!-- 弹窗 原密码不正确 -->
+	<div class="modal-wrapper" style="display:none;">
+		<div class="hint-box">
+		  <h3>提示</h3>
+		  <p class="hint-ts-styls" style="font-size:14px;"><i class="b-ico-error"></i><b>原密码不正确</b></p>	 
+		  <p class="hint-ts-styls" style="text-align:right;"><a class="hint-qd-btu" style="width: 70px; height: 25px; line-height: 25px; font-size: 14px;" href="">确定</a></p>		  
+		  <i class="b-ico-close"></i>
+		</div>
+	</div>
+<include file="Public/footer" />

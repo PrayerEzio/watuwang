@@ -1,0 +1,36 @@
+		<div class="admin-left-list fl">
+			<div class="admin-list-items">
+				<h3>个人作品</h3>
+				<ul>
+					<li><a <if condition="CONTROLLER_NAME EQ Works && ACTION_NAME EQ piece_uploads"> class="on" </if> href="{:U('Works/piece_uploads')}"><i class="c-ico-uploa"></i>作品上传</a></li>
+					<li><a <if condition="CONTROLLER_NAME EQ Works && ACTION_NAME EQ piece_manage"> class="on" </if> href="{:U('Works/piece_manage')}"><i class="c-ico-super"></i>作品管理</a></li>
+					<li><a <if condition="CONTROLLER_NAME EQ Works && ACTION_NAME EQ album__manage"> class="on" </if> href="{:U('Works/album__manage')}"><i class="c-ico-super"></i>专辑管理</a></li>
+					<li><a <if condition="CONTROLLER_NAME EQ Works && ACTION_NAME EQ my"> class="on" </if> href="{:U('Works/my')}"><i class="c-ico-collect"></i>我的收藏</a></li>
+				</ul>
+			</div>	
+
+			<div class="admin-list-items">
+				<h3>账户记录</h3>
+				<ul>
+					<li><a href="{:U('Account/balance')}"><i class="c-ico-mon"></i>账户余额</a></li>
+					<li><a href="{:U('Account/gold')}"><i class="c-ico-mon"></i>金币记录</a></li>
+					<li><a href="{:U('Account/recharge')}"><i class="c-ico-love"></i>充值奖励</a></li>
+					<li><a href="{:U('Account/log')}"><i class="c-ico-log"></i>登录日志</a></li>
+				</ul>
+			</div>	
+
+			<div class="admin-list-items">
+				<h3>等级成长</h3>
+				<ul>
+					<li><a href="{:U('Grade/index')}"><i class="c-ico-crown"></i>个人等级</a></li>
+				</ul>
+			</div>
+
+			<div class="admin-list-items">
+				<h3>最新通知</h3>
+				<ul>
+					<li><a href="{:U('Notice/mail')}"><i class="c-ico-mail"></i>站内信</a></li>
+					<li><a href="{:U('Notice/report')}"><i class="c-ico-state"></i>举报申述</a></li>
+				</ul>
+			</div>	
+		</div>

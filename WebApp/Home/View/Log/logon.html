@@ -1,0 +1,32 @@
+<include file="Public/header" />
+<include file="Public/top" />
+<include file="Public/menu" />
+
+ <!-- 注册  -->
+<div class="login-box">
+	 <div class="login-main-box" style="padding:45px 0 34px 195px;margin-top: 95px;">
+	 		<form id="log" action="" method="post">
+		 	<div class="logon-main" style="margin-left:240px;">
+		 		 <div class="login-head"><h3>注册哇图网账号</h3></div>
+		 		 <input class="login-input logico-user" name="member_name" type="text" placeholder="邮箱/用户名">
+		 		 <input class="login-input logico-email" name="email" type="text" placeholder="Email">
+		 		 <input class="login-input logico-pw" name="pwd" type="password" placeholder="登录密码">
+		 		 <input class="login-input logico-pw" name="payment_pwd" type="password" placeholder="确认登录密码">
+		 		 <input class="login-input logico-zf" name="payment" type="password" placeholder="支付密码">
+		 		 <input class="login-input logico-zf" name="payment_payment" type="password" placeholder="确认支付密码">
+		 		 <input class="login-input logico-phone" name="mobile" type="text" placeholder="手机绑定">
+<!-- 				 <input class="login-input getcode" type="button" value="重新获取验证码(59秒)"><span class="codehint">验证码已经发送</span>
+				 <input class="login-input codetext" type="text"> -->
+		 		 <a class="orgion-b submitbtn" style="width:122px;" href="javascript:">确 定</a>
+		 		 <a class="fr" style="font-size:12px;" href="{:U('Public/login')}">已有账号？<em class="orange">登录到哇图</em></a>
+		 	</div>
+			</form>
+			<script>
+				$(".submitbtn").click(function(){
+					$("#log").submit();
+				});
+			</script>
+	 </div>
+</div>
+<!-- 注册 end -->
+<include file="Public/footer" />

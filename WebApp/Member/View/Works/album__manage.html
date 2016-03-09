@@ -1,0 +1,170 @@
+<include file="Public/header" />
+<include file="Public/nav" />
+<div class="admin-main-box">
+	<div class="wrap overhide mrg-bot">
+		<include file="Public/menu" />
+
+		<div class="manage-list-con fl">
+			<div onclick="addspecial()" class="special-box fl">
+				<a href="javascript:"><img src="img/addpic.png" alt=""></a>
+				<p>添加专辑</p>
+			</div>
+
+			<volist name="list" id="vo">
+			<div class="fl special-s-box">
+				<div class="special-item">
+					<img src="__IMGS__/338.jpg" width="148" height="148" alt="">
+					<p class="special-edit"><i onclick="succeedplay_1({$vo['album_id']})" class="b-ico-edit fl"></i><i class="b-ico-del fr"></i></p>
+				      <div class="qued-del" style="display:none">
+				      	<h3>确认删除</h3>
+				      	 <p><a class="spec-but" style="margin-right: 15px;" onclick="del({$vo['album_id']})" href="javascript:">确定</a><a class="spec-but bhqb spec-cancle" href="javascript:">取消</a></p>
+				      </div>
+				</div>
+				<p>{$vo['album_name']}</p>
+			</div>
+			</volist>
+<script>
+	function del(id){
+		var del_id = id;
+		var URL_ADD = "{:U('Works/album_del')}";
+		var data_add = {'del_id':del_id};
+		
+		$.get(URL_ADD,data_add,function(res){
+			switch(res){
+				case '-1':
+					alert('删除失败');
+					break;
+				case '1':
+					location.reload();
+					break;
+			}
+		})		
+	}
+
+
+	
+</script>
+
+ 		<!-- 广告部分 -->
+				<div style="height:80px;"></div>
+				<div class="footbanner"><img src="img/banner.jpg" alt=""></div>
+		</div>
+		 <!-- 清除浮动 -->
+		<div class="clearfloat"></div>
+	</div>
+</div>
+
+
+<!--foot nav  end-->
+<!-- 弹窗部分 -->
+<div class="modal-dialog-bg" style="display: none;"></div>
+
+<!-- 添加专辑 弹窗-->
+<div class="modal-wrapper modal-wrapper-big" style="display:none;">
+		<div class="ball-box"> 
+		  <h3>添加专辑</h3>
+	  	  <div class="ball-main-con">
+	  	  	<p><span class="lis"><em class="red">*</em>专辑名：</span><input class="zj-name" type="text" id="add_name" name="add_name" placeholder="输入专辑名称"></p>
+	  	  	<div class="textarea-d"><span class="lis">备注：</span><textarea id="add_desc" name="add_desc"></textarea></div>
+	  	    <div><span class="lis"></span><a class="inline-b esc" id="add"  href="javascript:">确认</a> <a class="inline-b clos" href="">取消</a></div>
+	  	  </div>
+		  <i class="b-ico-close"></i>
+		</div>
+</div>
+<script>
+	$("#add").click(function(){
+		var add_name = $("#add_name").val();
+		var add_desc = $("#add_desc").val();
+		
+		var URL_ADD = "{:U('Works/album_add')}";
+		var data_add = {'add_name':add_name,'add_desc':add_desc};
+		
+		$.get(URL_ADD,data_add,function(res){
+			switch(res){
+				case '-1':
+					alert('添加失败');
+					break;
+				case '1':
+					location=location;
+					break;
+			}
+		})
+	});
+
+</script>
+
+<!-- 编辑专辑 弹窗-->
+<div class="modal-wrapper modal-wrapper-edit" style="display:none;">
+		<div class="ball-box"> 
+		  <h3>编辑专辑</h3>
+	  	  <div class="ball-main-con">
+	  		  <input class="zj-name" type="hidden" id="edit_id"  value="">
+	  	  	<p><span class="lis"><em class="red">*</em>专辑名：</span><input class="zj-name" type="text" id="edit_name" placeholder="输入专辑名称" value=""></p>
+	  	  	<div class="textarea-d"><span class="lis">备注：</span><textarea id="edit_desc"></textarea></div>
+	  	    <div><span class="lis"></span><a class="inline-b esc" id="edit"  href="javascript:">确认</a> <a class="inline-b clos" href="" >取消</a></div>
+	  	  </div>
+		  <i class="b-ico-close"></i>
+		</div>
+</div>
+
+<script>
+function succeedplay_1(id){
+	var URL_edit = "{:U('Works/album_edit')}";
+	var data_edit = {'id':id};
+	$.get(URL_edit,data_edit,function(res){
+		if(res != ''){
+			
+			$("#edit_name").val(res.album_name);
+			$("#edit_desc").val(res.album_desc);
+			$("#edit_id").val(res.album_id);
+			$(".modal-wrapper-edit").css({display:'block'});
+		}
+	},'json');
+/* 	$(".modal-wrapper-edit").css({display,'block'}); */
+}
+
+
+
+
+
+$("#edit").click(function(){
+	var add_name = $("#edit_name").val();
+	var add_desc = $("#edit_desc").val();
+	var add_id = $("#edit_id").val();
+	
+	var URL_ADD = "{:U('Works/album_edit')}";
+	var data_add = {'add_id':add_id,'add_name':add_name,'add_desc':add_desc};
+	$.post(URL_ADD,data_add,function(res){
+		switch(res){
+			case '-1':
+				alert('修改失败');
+				break;
+			case '1':
+				location=location;
+				break;
+		}
+	})
+});
+
+</script>
+
+
+<!-- 专辑页操作成功 弹窗-->
+	<div class="modal-wrapper succeed-play" style="display:none;">
+		<div class="hint-box"> 
+		  <p class="hint-ts-styls"><i class="b-ico-succeed"></i>操作成功</p>	 
+		  <p class="hint-ts-styls"><a class="hint-qd-btu" href="">确定</a></p>		  
+		  <i  class="b-ico-close"></i>
+		</div>
+	</div>
+<!-- 专辑页操作失败 弹窗-->
+	<div class="modal-wrapper failplay" style="display:none;">
+		<div class="hint-box"> 
+		  <p class="hint-ts-styls"><i class="b-ico-succeed"></i>操作失败</p>	 
+		  <p class="hint-ts-styls"><a class="hint-qd-btu" href="">确定</a></p>		  
+		  <i  class="b-ico-close"></i>
+		</div>
+	</div>
+
+
+<include file="Public/footer" />

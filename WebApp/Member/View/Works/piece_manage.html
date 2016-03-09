@@ -1,0 +1,161 @@
+<include file="Public/header" />
+<include file="Public/nav" />
+
+<div class="admin-main-box">
+	<div class="wrap overhide mrg-bot">
+			<include file="Public/menu" />
+
+		<div class="manage-list-con fl">
+			<div class="admin-man-top">
+					<div <if condition="$goods_status eq -1">class="admin-man-top-nav on"<else />class="admin-man-top-nav"</if> ><a href="{:U('Works/piece_manage',array('goods_status'=>-1))}">未通过 <i class="red">{$not_num}</i></a></div>
+					<div <if condition="$goods_status eq 0">class="admin-man-top-nav on"<else />class="admin-man-top-nav"</if> ><a href="{:U('Works/piece_manage',array('goods_status'=>0))}">审核中 <i class="red">{$ben_num}</i></a>
+					
+						<div class="admin-sh-box">
+							<div class="arrow2"></div>
+							<div class="arrow"></div>
+							<div class="ois">
+								<p><a href="">原创非商拍卖 <em class="orange">10</em></a></p>
+								<p><a href="">原创非商出售 <em>5</em></a></p>
+							</div>
+						</div>
+					</div>
+					<div <if condition="$goods_status eq 1">class="admin-man-top-nav on"<else />class="admin-man-top-nav"</if> ><a href="{:U('Works/piece_manage',array('goods_status'=>1))}">已通过<i class="red">{$off_num}</i></a>
+						<div class="admin-sh-box">
+							<div class="arrow2"></div>
+							<div class="arrow"></div>
+							<div class="ois">
+								<p><a href="">需修改 <em class="red">10</em></a></p>
+								<p><a href="">未通过 <em class="red">5</em></a></p>
+							</div>
+						</div>
+					</div>
+				<div class="but-shan fr posin admin-zp">全部作品<i class="b-ico-5v5"></i>
+					<div class="admin-sh-box">
+						<div class="arrow2"></div>
+						<div class="arrow"></div>
+						<div class="ois">
+							<p><a href="">全部作品 <em>120</em></a></p>
+							<p><a href="">原创非商拍卖 <em class="orange">10</em></a></p>
+							<p><a href="">原创非商出售 <em>5</em></a></p>
+						</div>
+					</div>
+				</div>
+
+				<!-- 清除浮动 -->
+				<div class="clearfloat"></div>
+			</div>
+
+			<form id="sub" action="{:U('Works/piece_manage_del')}" method="post">
+			
+			
+			<div class="manage-list-con-detail">
+				<switch name="goods_status">
+				<case value="-1" >
+	    			<div class="manage-head">
+						<span class="man-w5">预览图</span>
+						<span class="man-w4">图片信息</span>
+						<span class="man-w6"></span>
+						<span class="man-w4">操作</span>
+	    			</div>
+					<volist name="list" id="vo">    			
+	    			<div class="manage-item">
+	    				<div class="man-w5 mana-a fl">
+	    					<input type="checkbox" name="del_id[]" value="{$vo['goods_id']}">
+	    					<img src="__UPLOADS__/{$vo['goods_file_thum']}" width="100" height="80" alt="">
+	    				</div>
+	    				<div class="man-w4 mana-b fl">
+	    					<p>图片名称：{$vo['good_file_name']}</p>
+	    					<p> {$vo['goods_order_sn']}</p>
+	    					<p>参数  {$vo['goods_file_suffix']}； {$vo['goods_file_size']|setupSize}</p>
+	    				</div>
+	    				<div class="man-w6 mana-d fl">
+	    					<p><b>原因：<em class="orange">文件质量</em> &nbsp;此图已被抛弃</b></p>
+	    					<p>亲爱的用户，由于此图片实用性较低，被删除。希望您在下次上传时有上佳表现，谢谢！</p>
+	    				</div>	    				
+	    				
+	    				<div class="man-w4 mana-c fl">
+	    				  <a href="{:U('Works/piece_manage_del',array('goods_id'=>$vo['goods_id']))}">删除</a>
+	    				</div>
+	    				<!-- 清除浮动 -->
+					      <div class="clearfloat"></div>
+	    			</div>
+					</volist>				
+				</case>
+				<case value="0" >
+	    			<div class="manage-head">
+	    				<span class="man-w5">预览图</span>
+	    				<span class="man-w2">图片信息</span>
+	    				<span class="man-w4">操作</span>
+	    			</div>
+					<volist name="list" id="vo">    			
+	    			<div class="manage-item">
+	    				<div class="man-w5 mana-a fl">
+	    					<input type="checkbox" name="del_id[]" value="{$vo['goods_id']}">
+	    					<img src="__UPLOADS__/{$vo['goods_file_thum']}" width="100" height="80" alt="">
+	    				</div>
+	    				<div class="man-w2 mana-b fl">
+	    					<p>图片名称：{$vo['good_file_name']}</p>
+	    					<p> {$vo['goods_order_sn']}</p>
+	    					<p>参数  {$vo['goods_file_suffix']}； {$vo['goods_file_size']|setupSize}</p>
+	    				</div>
+	    				<div class="man-w4 mana-c fl">
+	    				  <a href="{:U('Works/piece_manage_del',array('goods_id'=>$vo['goods_id']))}">删除</a>
+	    				</div>
+	    				<!-- 清除浮动 -->
+					      <div class="clearfloat"></div>
+	    			</div>
+					</volist>				
+				</case>
+				<case value="1" >
+	    			<div class="manage-head">
+	    				<span class="man-w5">预览图</span>
+	    				<span class="man-w2">图片信息</span>
+	    				<span class="man-w4">操作</span>
+	    			</div>
+					<volist name="list" id="vo">    			
+	    			<div class="manage-item">
+	    				<div class="man-w5 mana-a fl">
+	    					<input type="checkbox" name="del_id[]" value="{$vo['goods_id']}">
+	    					<img src="__UPLOADS__/{$vo['goods_file_thum']}" width="100" height="80" alt="">
+	    				</div>
+	    				<div class="man-w2 mana-b fl">
+	    					<p>图片名称：{$vo['good_file_name']}</p>
+	    					<p> {$vo['goods_order_sn']}</p>
+	    					<p>参数  {$vo['goods_file_suffix']}； {$vo['goods_file_size']|setupSize}</p>
+	    				</div>
+	    				<div class="man-w4 mana-c fl">
+	    				<a class="editbut" href="{:U('Works/piece_manage_edit',array('goods_id'=>$vo['goods_id']))}">编辑并提交</a><span>&nbsp;　　</span>  <a href="{:U('Works/piece_manage_del',array('goods_id'=>$vo['goods_id']))}">删除</a>
+	    				</div>
+	    				<!-- 清除浮动 -->
+					      <div class="clearfloat"></div>
+	    			</div>
+					</volist>				
+				</case>
+				</switch>
+				<div class="list-delete">
+					<a class="batch" href="javascript:" id="subm">批量删除</a>　　&nbsp;
+					<label><input type="checkbox" onclick="selectall()" /> <a href="javascript:" onclick="selectall()">全选</a></label>
+				</div>				
+    			<!-- 翻页 -->
+				<div class="pro_page">  
+					{$show}	
+				</div>
+			</div>
+			</form>
+			<!-- 广告部分 -->
+				<div style="height:80px;"></div>
+				<div class="footbanner"><img src="img/banner.jpg" alt=""></div>
+		</div>
+		 <!-- 清除浮动 -->
+		<div class="clearfloat"></div>
+	</div>
+</div>
+
+<script>
+$("#subm").click(function(){
+	$("#sub").submit();
+});
+
+</script>
+
+<include file="Public/footer" />

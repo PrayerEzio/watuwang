@@ -1,0 +1,77 @@
+<include file="Public/header" />
+<include file="Public/nav" />
+
+
+<!-- AJAX上传 -->
+<link rel="stylesheet" href="__UPIFY__/uploadify.css">
+<script src="__UPIFY__/jquery.uploadify.min.js"></script>
+
+<div class="admin-main-box">
+	<div class="wrap overhide mrg-bot">
+		<include file="Public/menu" />
+
+		<div class="admin-list-con fl">
+			<h3>原创非商作品上传</h3>
+			<div class="admin-list-con-detail">
+			  <div class="no-original-box">			  
+<!-- 					 <ul>
+					 	<li><label><i class="c-ico-upload"></i>上传源文件</label>
+					 	</li>
+					 	<li></li>
+					 </ul> -->
+					 <p class="upload-hint"><input id="file_upload" name="file_upload" type="file" multiple="true"></p>
+					 <p class="upload-hint"><i class="c-ico-sigh"></i>请上传不低于1000*1000分辨率的素材源文件</p> 
+
+					 <p class="upload-hint" id="upload-hint" style="display: none;"><i class="c-ico-dgou"></i>文件上传完毕，请等待管理员审核或<a class="addgreen" id="addgreen" href="javascript:" onclick="">继续添加素材上传</a></p>
+					 
+				<!-- 	 清除浮动 -->
+					<div class="clearfloat"></div>
+						
+						 
+						
+	 			  </div>
+			</div>
+			<!-- 广告部分 -->
+				<div style="height:80px;"></div>
+				<div class="footbanner"><img src="__IMG__/banner.jpg" alt=""></div>
+		</div>
+		 <!-- 清除浮动 -->
+		<div class="clearfloat"></div>
+	</div>
+</div>
+
+
+
+<!-- ajax上传 -->
+        <script type="text/javascript">
+            $(function() {
+                $('#file_upload').uploadify({
+                    'swf': '__UPIFY__/uploadify.swf',
+                    'uploader':"{:U('Member/Public/uploadify',array('session'=>session('member')['member_id']))}",
+                    'fileExt': '*.psd;*.png,*.png',	//上传文件格式
+                    'sizeLimit': '2048000',		//上传文件大小
+                    'multi':false,		
+                    'onUploadSuccess':function(file,data,response){
+                    	var reg = /^-[1-9]\d*$/;
+                    	var res = reg.test(data);
+                     	if(res == false){
+                    		$("#upload-hint").css({'display':'block'});
+	                    }else{
+	                    	alert("上传失败");
+	                    } 
+                     },
+                     'onCancel': funCancel,
+                });
+            });
+            //取消函数
+            function funCancel() {
+                alert('您取消了操作');
+            }
+
+			
+            
+            
+            
+        </script>
+
+<include file="Public/footer" />

@@ -1,0 +1,223 @@
+<include file="Public/header" />
+<include file="Public/nav" />
+<div class="admin-main-box">
+	<div class="wrap overhide mrg-bot">
+		<include file="Public/menu" />
+
+		<div class="admin-list-con fl">
+			<div class="admin-index-con-detail">
+				
+				
+				<div class="sfrz-main-box">
+					<h3 class="common-title">身份认证 <span class="font12"> 身份认证后可出售图片</span></h3>
+					<switch name="identity['id_status']">
+						<case value="-1"><b class="red">身份证未通过</b></case>
+						<case value="0"><b class="red">身份证待审核</b></case>
+						<case value="1"><b class="red">身份证已通过</b></case>
+					</switch>
+					
+<!-- 					<div>
+						身份认证部分未做
+					</div> -->
+					<div class="sfrz-edit">
+						<p><span><em class="red">*</em>所在地区：</span>
+						
+						<select name="province" id="province" style="width: 90px">
+		                    <if condition="$identity['province'] eq ''">
+		                    	<option value="">请选择</option>
+		                    	<else />
+		                   		 <option value="{$identity['province']}">{$identity['province']|city_find="name",###}</option>
+		                    </if>
+		                    <volist name="province" id="vo">
+		                    <option value="{$vo['id']}">{$vo['name']}</option>
+		                    </volist>
+		                </select>
+		                
+		                <select name="city" id="city" style="width: 90px">
+		                    <if condition="$identity['city'] eq ''">
+		                    	<option value="">请选择</option>
+		                    	<else />
+		                   		 <option value="{$identity['city']}">{$identity['city']|city_find="name",###}</option>
+		                    </if>
+		                </select>
+		                
+						<select name="area" id="area" style="width: 90px">
+		                    <if condition="$identity['area'] eq ''">
+		                    	<option value="">请选择</option>
+		                    	<else />
+		                   		 <option value="{$identity['area']}">{$identity['area']|city_find="name",###}</option>
+		                    </if>
+		                </select> 
+						
+					<script>
+						$('#province').change(function(){
+							var province = $(this).val();
+							var URL = "{:U('Member/User/problem')}";
+							var data = {"province":province};
+							$.get(URL,data,function(res){
+								$("#city").empty();
+								$("#area").empty();
+								var html = res;
+								$('#city').append(html);
+							})
+	
+						});
+						
+						$('#city').change(function(){
+							var city = $(this).val();
+							var URL = "{:U('Member/User/problem')}";
+							var data = {"city":city};
+							$.get(URL,data,function(res){
+								$("#area").empty();
+								var html = res;
+								$('#area').append(html);
+							})
+	
+						})						
+					</script>
+						
+						</p>
+						<p><span><em class="red">*</em>真实姓名：</span><input name="name" id="name" type="text" placeholder="输填写真实姓名" value="{$identity['name']}"></p>
+						<p><span><em class="red">*</em>身份证号码：</span><input name="cards" id="cards" type="text" placeholder="输填正确的身份证号码" value="{$identity['cards']}"></p>
+						<p><span><em class="red">*</em>联系地址：</span><input name="address" id="address" type="text" placeholder="" value="{$identity['address']}"></p>
+						<p><span><em class="red">*</em>手机号：</span><input name="mobile" id="mobile" type="text" placeholder="" value="{$identity['mobile']}"></p>
+						<p><span>电话：</span><input name="telephone" id="telephone" type="text" placeholder="" value="{$identity['telephone']}"></p>
+						<p><span>传真号：</span><input name="fax" id="fax" type="text" placeholder="" value="{$identity['fax']}"></p>
+					</div>
+					<h3 class="common-title">支付宝账号</h3>
+					<switch name="identity['apply_status']">
+						<case value="-1"><b class="red">支付宝账号未通过</b></case>
+						<case value="0"><b class="red">支付宝账号待审核</b></case>
+						<case value="1"><b class="red">支付宝账号已通过</b></case>
+					</switch>
+					<div class="sfrz-edit">
+						<p><span><em class="red">*</em>账号：</span><input name="apply_number" id="apply_number" type="text" placeholder="" value="{$identity['apply_number']}"></p>
+						<p><span><em class="red">*</em>收款人：</span><input name="apply_name" id="apply_name" type="text" placeholder="" value="{$identity['apply_name']}"></p>
+						
+						<div class="deal"><span>&nbsp;</span><input type="checkbox" id="check"> 查看并同意<a class="blues" href="">《哇图网原创出售协议》</a></div>
+						<p><span>&nbsp;</span><a class="orgion-b submitbtn inline-b tijiao1" href="javascript:">确定</a></p>
+					</div>
+				</div>
+
+
+
+					<script>
+						$(".tijiao1").click(function(){
+							var check = $("#check").is(':checked');
+							if(check == false){
+								var text="请认真阅读出售协议";
+								$("#text2").empty();
+								$("#text2").text(text);
+								failplay();
+								return false;
+							}
+							var URL = "{:U('Member/User/certified')}";
+							var apply_name = $("#apply_name").val();
+							var apply_number = $("#apply_number").val();
+							var fax = $("#fax").val();
+							var telephone = $("#telephone").val();
+							var mobile = $("#mobile").val();
+							var address = $("#address").val();
+							var cards = $("#cards").val();
+							var name = $("#name").val();
+							var area = $("#area").val();
+							var city = $("#city").val();
+							var province = $("#province").val();
+							
+							var data = {
+									"apply_name":apply_name,
+									"apply_number":apply_number,
+									"fax":fax,
+									"mobile":mobile,
+									"address":address,
+									"cards":cards,
+									"name":name,
+									"area":area,
+									"city":city,
+									"province":province,
+									"telephone":telephone,
+									'apply_name':apply_name
+							}
+							$.post(URL,data,function(res){
+								switch(res){
+									case "-1":
+										var text="请认真填写数据";
+										$("#text2").empty();
+										$("#text2").text(text);
+										failplay();
+										break;
+									case "-2":
+										var text="数据提交失败";
+										$("#text2").empty();
+										$("#text2").text(text);
+										failplay();
+										break;
+									case "-3":
+										var text="数据修改失败";
+										$("#text2").empty();
+										$("#text2").text(text);
+										failplay();
+										break;										
+									case "1":
+										var text="提交成功,请耐心等待审核";
+										$("#text").empty();
+										$("#text").text(text);
+										succeedplay();
+										break;
+									case "2":
+										var text="信息修改成功,请耐心等待审核";
+										$("#text").empty();
+										$("#text").text(text);
+										succeedplay();
+										break;										
+ 									default:
+										var text="非法操作";
+										$("#text2").empty();
+										$("#text2").text(text);
+										failplay();
+										break; 
+								}	
+							})
+						});
+					</script>
+
+
+			</div>
+		</div>
+		 <!-- 清除浮动 -->
+		<div class="clearfloat"></div>
+	</div>
+</div>
+
+
+	
+<!-- 弹窗 资料提交成功 -->
+	<div class="modal-wrapper succeed-play" style="display:none;">
+		<div class="hint-box"> 
+		  <h3>提示</h3>
+		  <p class="hint-ts-styls" ><i class="b-ico-succeed"></i><span id="text"></span></p>	 
+		  <p class="hint-ts-styls"><a class="hint-qd-btu sub" href="javascript:">确定</a></p>		  
+		  <i class="b-ico-close"></i>
+		</div>
+	</div>	
+
+
+<!-- 弹窗 资料提交失败 -->
+	<div class="modal-wrapper failplay" style="display:none;">
+		<div class="hint-box">
+		  <h3>提示</h3>
+		  <p class="hint-ts-styls sub"><i class="b-ico-error"></i><span id="text2"></span></p>	 
+		  <p class="hint-ts-styls"><a class="hint-qd-btu" href="">确定</a></p>		  
+		  <i class="b-ico-close"></i>
+		</div>
+	</div>
+
+
+
+<script>
+$(".sub").click(function(){
+	$('.modal-dialog-bg').hide();
+	$('.succeed-play').hide();
+});
+</script>
+<include file="Public/footer" />

@@ -1,0 +1,46 @@
+<include file="Public/header" />
+<include file="Public/nav" />
+<div class="admin-main-box">
+	<div class="wrap overhide mrg-bot">
+		<include file="Public/menu" />
+
+		<div class="admin-list-con fl">
+			<div class="admin-index-con-detail">
+				<div class="admin-index-head">
+					<div class="member-pic-box fl">
+						<img id="Member-img" src="__UPLOADS__/{$user['avatar']}" width="170" height="170" alt="">
+						<label class="pen" href=""><img src="__IMG__/pen.png" alt=""><input id="PenEdit" style="display:none" type="file"></label>
+					</div>
+					<div class="member-info-box fl">
+						<p><i class="c-ico-member"></i>用户名：{$user['member_name']}</p>
+						<p><i class="c-ico-crown"></i>个人等级：<span class="grade no{$user['member_degree']}">&nbsp;</span></p>
+						<p><i class="c-ico-message"></i>最新通知：<a href=""> >>>>> </a> </p>
+					</div>
+
+					<div class="member-rech-box fl">
+						<p><i class="c-ico-zf"></i><a href="" class="orange">立刻充值</a> 账户余额：<em class="red">{$user['predeposit']}</em></p>
+						<p><i class="c-ico-bd"></i><a href="{:U('')}" class="orange">立刻绑定</a> 手机绑定：<if condition="$user['mobile'] eq ''"><em>未绑定</em><else />{$user['mobile']}</if></p>
+					</div>
+
+					<!-- 清除浮动 -->
+						<div class="clearfloat"></div>
+				</div>
+			 
+			 	<div class="member-foot-moy">
+			 		<span class="moy1">今日收入金额: <em class="red">￥98.00</em></span>
+			 		<span class="moy2">当月收入金额: <em class="red">￥98.00</em></span>
+			 		<span class="moy3">总收入金额: <em class="red">￥98.00</em></span>			 	
+				</div>
+
+				
+				<!-- 广告部分 -->
+				<div style="height:80px;"></div>
+				<div class="footbanner"><img src="__IMG__/banner.jpg" alt=""></div>
+
+			</div>
+		</div>
+		 <!-- 清除浮动 -->
+		<div class="clearfloat"></div>
+	</div>
+</div>
+<include file="Public/footer" />

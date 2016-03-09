@@ -1,0 +1,83 @@
+<include file="Public/header" />
+<include file="Public/top" />
+<include file="Public/menu" />
+
+	<div class="details-rele-box">
+		<div class="details-fissue">
+			<a href="{:U('Home/Demand/goods_add',array('action'=>ACTION_NAME))}">发布需求</a>
+		</div>
+	</div>
+
+<div class="discount-box">
+  <div class="wrap">
+   <div class="box-top-nav">位置：<a href="">首页</a><span> &gt; </span><a href="">找图</a></div>
+   <div class="discount-head zt">
+   			<ul>
+   				<li <if condition="$tag eq time || $tag eq ''">class="on"</if>><a href="{:U('Home/Goods/images',array('tag'=>'time'))}">最新发布</a></li>
+   				<li <if condition="$tag eq money">class="on"</if>><a href="{:U('Home/Goods/images',array('tag'=>'money'))}">赏金排行<i class="c-ico-paix"></i></a></li>
+   				<li <if condition="$tag eq num">class="on"</if>><a href="{:U('Home/Goods/images',array('tag'=>'num'))}">投标数量<i class="c-ico-paix"></i></a></li>
+   				<li <if condition="$tag eq 1">class="on"</if>><a href="{:U('Home/Goods/images',array('tag'=>'1'))}">已完成</a></li>
+   				<li class="fr"><a href="" style="border-left: 1px solid #cfcfcf;">任务管理</a></li>
+   			</ul>
+   			<!-- 清浮动 -->
+			<div class="clearfloat"></div>	
+   </div>
+  </div>
+</div>
+
+<!-- 瀑布流 -->
+	<div class="h-water-box">
+		<div class="wrap">
+			<div class="collections-container">
+				
+				
+				<notempty name="list">
+				<div id="main-content" class="water-main-box">
+				<volist name="list" id="vo">
+				  <div class="water-item opacity">
+				  	<div class="it-snav">
+				  		<a href="{:U('Home/Goods/images_details')}"><img src="__UPLOADS__/{$vo['img_list']}" width="250" alt=""></a>
+				  		<p class="ite-sc">
+				  			<i class="b-ico-face"></i>
+				  			<a class="collect" onclick="collects(this)"  href="javascript:">收藏</a><span>|</span><a href="">下载</a>
+			  			</p>
+				    </div>
+				  	<p><i class="c-ico-mon"></i>悬赏：{$vo['goods_reward']}哇图币 <em class="fr">0回答</em></p>
+				  	<p><i class="c-ico-head"></i><span class="orange">{$vo['member_id']|user_name}</span><em class="fr">{$vo['goods_time']|date="Y-m-d H:i:s",###}</em></p>
+				  </div>
+				</volist>
+				</div>
+				<div class="pro_page">  
+					{$show}	
+				</div> 
+				<else />
+				<div id="main-content" class="water-main-box">
+				</div>
+			  <div class="no-result" style="">
+			  	<p><img src="__IMG__/cry.png" alt=""></p>
+			  	<p style="margin-top:40px;">抱歉，没有找到符合条件的素材</p>
+			  	<h3>建议您简化或换关键词搜索</h3>
+			  	<a class="sumb-but" href="">发布需求</a>
+			  </div>
+			  </notempty>
+				
+			</div>
+		</div>
+	</div>
+<script>
+$(function(){  
+   $('#main-content').masonry({
+    itemSelector : '.water-item',
+    isAnimated: false,
+    gutterWidth:43
+  });  
+   var $container = $('#main-content');  
+	$container.imagesLoaded( function(){  
+	    $container.masonry({  
+	        itemSelector : '.water-item'
+	    });  
+	});
+});
+
+</script>
+<include file="Public/footer" />
